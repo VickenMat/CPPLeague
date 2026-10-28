@@ -18,7 +18,7 @@ const LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
-const BRAND_COLORS = ["#ef4444", "#60a5fa", "#fb923c"]; // red-500, blue-400, orange-400
+const HOVER_COLOR = "#A4D65E";
 const TOP_THRESHOLD = 8;
 const SCROLL_DELTA = 3;
 
@@ -215,10 +215,6 @@ export default function SiteHeader() {
 }
 
 /* ——— helpers ——— */
-function pickBrandColor() {
-  return BRAND_COLORS[(Math.random() * BRAND_COLORS.length) | 0];
-}
-
 function NavItem({
   href,
   label,
@@ -233,7 +229,7 @@ function NavItem({
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      onMouseEnter={() => setHoverColor(pickBrandColor())}
+      onMouseEnter={() => setHoverColor(HOVER_COLOR)}
       onMouseLeave={() => setHoverColor(null)}
       className={[
         "px-2 py-1 rounded-md transition-colors duration-150",
@@ -263,7 +259,7 @@ function MobileNavItem({
       href={href}
       aria-current={active ? "page" : undefined}
       onClick={onClick}
-      onMouseEnter={() => setHoverColor(pickBrandColor())}
+      onMouseEnter={() => setHoverColor(HOVER_COLOR)}
       onMouseLeave={() => setHoverColor(null)}
       className={[
         "block px-3 py-2 rounded-lg text-base font-medium transition-colors",

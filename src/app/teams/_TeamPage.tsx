@@ -97,7 +97,7 @@ export default async function TeamPage({ teamId }: { teamId: string }) {
             ([label, players]) =>
               players.length > 0 && (
                 <section key={label} className="mt-6">
-                  <h3 className="mb-3 text-center text-lg font-bold text-[#D9D7B6]">
+                  <h3 className="mb-3 text-center text-lg font-bold text-[#FFB81C]">
                     {label}
                   </h3>
                   <div className="overflow-x-auto rounded-xl border border-gray-800">

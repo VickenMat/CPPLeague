@@ -145,7 +145,7 @@ function TierRow({
   return (
     <div
       ref={setNodeRef}
-      className={`min-h-24 rounded-xl border p-4 ${tier === "Unassigned" ? "md:col-span-5 border-red-500/50 bg-black/30" : `${TIER_STYLES[tier].border} ${TIER_STYLES[tier].soft}`} ${isOver ? "ring-2 ring-[#D9D7B6]" : ""}`}
+      className={`min-h-24 rounded-xl border p-4 ${tier === "Unassigned" ? "md:col-span-5 border-[#005030]/50 bg-black/30" : `${TIER_STYLES[tier].border} ${TIER_STYLES[tier].soft}`} ${isOver ? "ring-2 ring-[#FFB81C]" : ""}`}
     >
       <h2 className="mb-3 text-center font-bold">{tier}</h2>
       <div className="flex flex-wrap justify-center gap-3">{children}</div>

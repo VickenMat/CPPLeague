@@ -61,10 +61,10 @@ function buildParams(sp: Record<string, unknown> | undefined) {
 }
 
 /* ---------- Shared visual system ---------- */
-const CREAM = "#D9D7B6";
+const CREAM = "#FFB81C";
 
 function sectionAccent() {
-  return "relative rounded-2xl border border-gray-800 bg-black/20 ring-1 ring-red-500/40 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:rounded-t-2xl before:bg-red-600 before:content-['']";
+  return "relative rounded-2xl border border-[#005030] bg-black/20 ring-1 ring-[#005030]/40 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:rounded-t-2xl before:bg-[#005030] before:content-['']";
 }
 
 export default async function AllTimePage({
@@ -817,7 +817,7 @@ function CardBlock({
   items: any[];
   type: "match" | "pf";
 }) {
-  const CREAM = "#D9D7B6";
+  const CREAM = "#FFB81C";
   return (
     <div className="w-full sm:max-w-sm rounded-xl border border-gray-800 bg-black/25 p-4 text-center">
       <div className="font-semibold leading-tight" style={{ color: CREAM }}>

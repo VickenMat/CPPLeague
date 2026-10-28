@@ -1,5 +1,41 @@
 @import "tailwindcss";
 
+@theme {
+  --color-red-200: #005030;
+  --color-red-300: #005030;
+  --color-red-400: #005030;
+  --color-red-500: #005030;
+  --color-red-600: #005030;
+  --color-red-700: #005030;
+  --color-red-800: #005030;
+  --color-red-900: #005030;
+  --color-red-950: #005030;
+  --color-blue-100: #a4d65e;
+  --color-blue-200: #a4d65e;
+  --color-blue-300: #a4d65e;
+  --color-blue-400: #a4d65e;
+  --color-blue-500: #a4d65e;
+  --color-blue-600: #a4d65e;
+  --color-blue-700: #a4d65e;
+  --color-blue-800: #a4d65e;
+  --color-blue-900: #a4d65e;
+  --color-blue-950: #a4d65e;
+  --color-sky-100: #a4d65e;
+  --color-sky-300: #a4d65e;
+  --color-sky-500: #a4d65e;
+  --color-sky-600: #a4d65e;
+  --color-sky-700: #a4d65e;
+  --color-sky-900: #a4d65e;
+  --color-indigo-300: #a4d65e;
+  --color-indigo-400: #a4d65e;
+}
+
+:root {
+  --cpp-green: #005030;
+  --cpp-gold: #ffb81c;
+  --cpp-avocado: #a4d65e;
+}
+
 /* visited won't turn purple */
 .site-nav a:link,
 .site-nav a:visited {
@@ -34,8 +70,14 @@ main {
   min-height: calc(100svh - 4rem);
 }
 :where(a, button, input, select):focus-visible {
-  outline: 2px solid #d9d7b6;
+  outline: 2px solid var(--cpp-gold);
   outline-offset: 3px;
+}
+
+button:enabled:hover {
+  border-color: var(--cpp-avocado);
+  background-color: var(--cpp-avocado);
+  color: var(--cpp-green);
 }
 @media (prefers-reduced-motion: reduce) {
   *,

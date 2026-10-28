@@ -43,7 +43,7 @@ const POS_INDEX: Record<string, number> = POS_ORDER.reduce(
   {} as Record<string, number>,
 );
 
-const EGGSHELL = "#F0EAD6";
+const EGGSHELL = "#FFB81C";
 
 /** --------------- Helpers --------------- */
 const uid = () => Math.random().toString(36).slice(2, 10);
@@ -1092,7 +1092,7 @@ export default function TradePage() {
                 className={[
                   "px-6 py-2 rounded-xl border text-sm font-semibold transition",
                   canReview
-                    ? "bg-[rgba(240,234,214,1)] text-black border-transparent hover:bg-[rgba(240,234,214,0.9)]"
+                    ? "bg-[#FFB81C] text-black border-transparent hover:bg-[#A4D65E]"
                     : "border-gray-700 text-gray-500 cursor-not-allowed bg-black/30",
                 ].join(" ")}
               >

@@ -11,7 +11,7 @@
     rx="25"
     ry="16"
     transform="rotate(-30 38 36)"
-    fill="#d9d7b6"
+    fill="#ffb81c"
   />
   <path d="m28 42 20-12m-16 3 5 8m1-12 5 8" stroke="#111827" stroke-width="3" />
   <text

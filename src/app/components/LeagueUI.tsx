@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 
 export const CREAM_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#D9D7B6] px-5 py-2.5 font-semibold text-black transition hover:bg-[#cfcdb3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9D7B6] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950";
+  "inline-flex items-center justify-center rounded-xl border border-[#FFB81C] bg-[#FFB81C] px-5 py-2.5 font-semibold text-black transition hover:border-[#A4D65E] hover:bg-[#A4D65E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFB81C] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950";
 export type Accent = "red" | "blue" | "orange";
 const ACCENTS: Record<Accent, string> = {
-  red: "ring-red-600/70 before:bg-red-600",
-  blue: "ring-blue-600/70 before:bg-blue-600",
-  orange: "ring-orange-500/70 before:bg-orange-500",
+  red: "ring-[#005030]/70 before:bg-[#005030]",
+  blue: "ring-[#A4D65E]/70 before:bg-[#A4D65E]",
+  orange: "ring-[#FFB81C]/70 before:bg-[#FFB81C]",
 };
 
 export function PageShell({
@@ -46,7 +46,7 @@ export function AccentPanel({
 }) {
   return (
     <section
-      className={`relative rounded-2xl border border-gray-800/60 bg-black/30 p-5 shadow-lg ring-1 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:rounded-t-2xl before:content-[''] sm:p-6 ${ACCENTS[tone]} ${className}`}
+      className={`relative rounded-2xl border border-[#005030] bg-black/30 p-5 shadow-lg ring-1 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:rounded-t-2xl before:content-[''] sm:p-6 ${ACCENTS[tone]} ${className}`}
     >
       {children}
     </section>

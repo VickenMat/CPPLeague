@@ -8,7 +8,7 @@ function RuleTable({ rows }: { rows: RuleRow[] }) {
         {rows.map((row) => (
           <tr
             key={row.label}
-            className="border-t border-gray-800 odd:bg-white/[0.025]"
+            className="border-t border-[#005030] odd:bg-white/[0.025]"
           >
             <th
               scope="row"
@@ -16,7 +16,7 @@ function RuleTable({ rows }: { rows: RuleRow[] }) {
             >
               {row.label}
             </th>
-            <td className="border-l border-gray-800 px-4 py-3">{row.value}</td>
+            <td className="border-l border-[#005030] px-4 py-3">{row.value}</td>
           </tr>
         ))}
       </tbody>
@@ -57,7 +57,7 @@ export default async function RulesPage() {
               </thead>
               <tbody>
                 {rules.roster.map((slot) => (
-                  <tr key={slot.slot} className="border-t border-gray-800">
+                  <tr key={slot.slot} className="border-t border-[#005030]">
                     <th
                       scope="row"
                       className="px-4 py-3 font-normal text-gray-300"
@@ -76,7 +76,7 @@ export default async function RulesPage() {
           <h2 className="mb-5 text-center text-3xl font-bold">Scoring</h2>
           <div className="grid items-start gap-6 lg:grid-cols-2">
             {rules.scoringGroups.map((group) => (
-              <AccentPanel key={group.title} tone="blue">
+              <AccentPanel key={group.title}>
                 <h3 className="mb-4 text-xl font-bold">{group.title}</h3>
                 <RuleTable rows={group.rows} />
               </AccentPanel>
@@ -96,7 +96,7 @@ export default async function RulesPage() {
                     {division.teams.map((name) => (
                       <li
                         key={name}
-                        className="border-t border-gray-800 px-4 py-2 text-sm text-gray-300"
+                        className="border-t border-[#005030] px-4 py-2 text-sm text-gray-300"
                       >
                         {name}
                       </li>
@@ -108,7 +108,7 @@ export default async function RulesPage() {
           </AccentPanel>
         )}
         {rules.sections.slice(2).map((section) => (
-          <AccentPanel key={section.title} tone="orange">
+          <AccentPanel key={section.title}>
             <h2 className="mb-4 text-2xl font-bold">{section.title}</h2>
             <RuleTable rows={section.rows} />
           </AccentPanel>

@@ -1,4 +1,8 @@
-import { PageShell, AccentPanel } from "../components/LeagueUI";
+import {
+  PageShell,
+  AccentPanel,
+  CREAM_BUTTON,
+} from "../components/LeagueUI";
 import { getLeagueSummary } from "../../../lib/getLeagueSummary";
 import { getLeagueDraft } from "../../../lib/league-draft";
 import Rankings from "./Rankings";
@@ -36,7 +40,7 @@ export default async function DraftPage({
             <option key={year}>{year}</option>
           ))}
         </select>
-        <button className="rounded-lg border border-gray-700 px-4 py-2">
+        <button className={CREAM_BUTTON}>
           View season
         </button>
       </form>

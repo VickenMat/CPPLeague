@@ -266,7 +266,7 @@ function PdfSection({
           <a
             href={pdfPath}
             download
-            className="px-4 py-2 rounded-xl font-semibold text-black bg-[#D9D7B6] hover:bg-[#cfcdb3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+            className="px-4 py-2 rounded-xl font-semibold text-black bg-[#FFB81C] hover:bg-[#A4D65E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
           >
             {downloadName}
           </a>
@@ -274,7 +274,7 @@ function PdfSection({
             href={pdfPath}
             target="_blank"
             rel="noreferrer"
-            className="px-4 py-2 rounded-xl font-semibold text-black bg-[#D9D7B6] hover:bg-[#cfcdb3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+            className="px-4 py-2 rounded-xl font-semibold text-black bg-[#FFB81C] hover:bg-[#A4D65E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
           >
             {openLabel}
           </a>
