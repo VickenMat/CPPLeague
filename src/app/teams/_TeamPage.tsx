@@ -9,6 +9,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLeagueSummary } from "../../../lib/getLeagueSummary";
 import { getLeagueRoster } from "../../../lib/league-roster";
+import { positionTextClass } from "../lib/position-colors";
 
 type Player = {
   id: number;
@@ -119,13 +120,19 @@ export default async function TeamPage({ teamId }: { teamId: string }) {
                             key={player.id}
                             className="border-t border-gray-800"
                           >
-                            <td className="px-4 py-3">
+                            <td
+                              className={`px-4 py-3 ${positionTextClass(player.lineupSlot || "")}`}
+                            >
                               {player.lineupSlot || "—"}
                             </td>
                             <td className="px-4 py-3 font-semibold">
                               {player.name}
                             </td>
-                            <td className="px-4 py-3">{player.position}</td>
+                            <td
+                              className={`px-4 py-3 ${positionTextClass(player.position)}`}
+                            >
+                              {player.position}
+                            </td>
                             <td className="px-4 py-3">
                               {player.nflTeam || "—"}
                             </td>

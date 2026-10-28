@@ -21,9 +21,9 @@ type Player = { rank: number; name: string; pos: Pos; team?: string };
 type ParsedPlayer = { rank: number; name: string; pos: string; team?: string };
 
 const POS_COLOR_TEXT: Record<Pos, string> = {
-  QB: "text-red-400",
+  QB: "text-[#F87171]",
   RB: "text-green-400",
-  WR: "text-blue-400",
+  WR: "text-[#60A5FA]",
   TE: "text-orange-400",
   "D/ST": "text-purple-400",
   K: "text-yellow-300",
@@ -300,16 +300,16 @@ function PositionFilter({
     { text: string; filled: string }
   > = {
     QB: {
-      text: "text-red-400",
-      filled: "bg-red-600 hover:bg-red-500 border-red-500 text-white",
+      text: "text-[#F87171]",
+      filled: "border-[#EF4444] bg-[#DC2626] text-white",
     },
     RB: {
       text: "text-green-400",
       filled: "bg-green-600 hover:bg-green-500 border-green-500 text-white",
     },
     WR: {
-      text: "text-blue-400",
-      filled: "bg-blue-600 hover:bg-blue-500 border-blue-500 text-white",
+      text: "text-[#60A5FA]",
+      filled: "border-[#3B82F6] bg-[#2563EB] text-white",
     },
     TE: {
       text: "text-orange-400",

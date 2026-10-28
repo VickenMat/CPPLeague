@@ -20,11 +20,11 @@ export default async function StandingsPage() {
           Playoff Seeds
         </span>
         <span className="flex items-center gap-2">
-          <span className="h-4 w-4 rounded border border-emerald-400 bg-emerald-500/20" />
+          <span className="h-3 w-3 rounded-full bg-yellow-300" />
           Highest PF
         </span>
         <span className="flex items-center gap-2">
-          <span className="h-4 w-4 rounded border border-red-400 bg-red-500/20" />
+          <span className="h-3 w-3 rounded-full bg-orange-400" />
           Lowest PF
         </span>
         <span className="flex items-center gap-2">
@@ -61,17 +61,11 @@ export default async function StandingsPage() {
                 );
                 const high = differentiated && row.pointsFor === maxPF,
                   low = differentiated && row.pointsFor === minPF;
-                const highlight = high
-                  ? "bg-emerald-500/20 ring-1 ring-inset ring-emerald-400"
-                  : low
-                    ? "bg-red-500/15 ring-1 ring-inset ring-red-400"
-                    : index % 2
-                      ? "bg-black/10"
-                      : "";
+                const rowBackground = index % 2 ? "bg-black/10" : "";
                 return (
                   <tr
                     key={row.teamId}
-                    className={`${highlight} ${playoffTeams && row.rank === playoffTeams ? "border-b-[3px] border-yellow-400" : "border-b border-gray-800"}`}
+                    className={`${rowBackground} ${playoffTeams && row.rank === playoffTeams ? "border-b-[3px] border-yellow-400" : "border-b border-gray-800"}`}
                   >
                     <td className="px-4 py-3 text-center tabular-nums">
                       {row.rank}

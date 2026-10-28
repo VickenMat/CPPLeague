@@ -220,7 +220,7 @@ export default function TransactionHistory({
                   <th scope="col" className="px-3 py-3 text-green-400">
                     Add
                   </th>
-                  <th scope="col" className="px-3 py-3 text-red-400">
+                  <th scope="col" className="px-3 py-3 text-[#F87171]">
                     Cut
                   </th>
                   <th scope="col" className="px-3 py-3">

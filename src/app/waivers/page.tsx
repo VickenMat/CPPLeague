@@ -41,9 +41,9 @@ const formatPoints = (value: number | null) =>
   value == null ? "—" : value.toFixed(1);
 const PLAYERS_PER_PAGE = 100;
 const POSITION_COLORS: Record<string, string> = {
-  QB: "text-red-400",
+  QB: "text-[#F87171]",
   RB: "text-green-400",
-  WR: "text-blue-400",
+  WR: "text-[#60A5FA]",
   TE: "text-orange-400",
   "D/ST": "text-purple-400",
   K: "text-yellow-300",

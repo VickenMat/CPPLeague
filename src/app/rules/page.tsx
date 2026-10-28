@@ -1,22 +1,20 @@
 import { PageShell, AccentPanel } from "../components/LeagueUI";
 import { getLeagueRules, type RuleRow } from "../../../lib/league-rules";
+import { positionTextClass } from "../lib/position-colors";
 export const dynamic = "force-dynamic";
 function RuleTable({ rows }: { rows: RuleRow[] }) {
   return (
     <table className="w-full text-left text-sm">
       <tbody>
         {rows.map((row) => (
-          <tr
-            key={row.label}
-            className="border-t border-[#005030] odd:bg-white/[0.025]"
-          >
+          <tr key={row.label} className="odd:bg-white/[0.025]">
             <th
               scope="row"
-              className="w-1/2 px-4 py-3 font-normal text-gray-300"
+              className={`w-1/2 px-4 py-3 font-normal ${positionTextClass(row.label.match(/\((QB|WR)\)/)?.[1] || "") || "text-gray-300"}`}
             >
               {row.label}
             </th>
-            <td className="border-l border-[#005030] px-4 py-3">{row.value}</td>
+            <td className="px-4 py-3">{row.value}</td>
           </tr>
         ))}
       </tbody>
@@ -57,10 +55,10 @@ export default async function RulesPage() {
               </thead>
               <tbody>
                 {rules.roster.map((slot) => (
-                  <tr key={slot.slot} className="border-t border-[#005030]">
+                  <tr key={slot.slot} className="odd:bg-white/[0.025]">
                     <th
                       scope="row"
-                      className="px-4 py-3 font-normal text-gray-300"
+                      className={`px-4 py-3 font-normal ${positionTextClass(slot.position.match(/\((QB|WR)\)/)?.[1] || "") || "text-gray-300"}`}
                     >
                       {slot.position}
                     </th>
@@ -96,7 +94,7 @@ export default async function RulesPage() {
                     {division.teams.map((name) => (
                       <li
                         key={name}
-                        className="border-t border-[#005030] px-4 py-2 text-sm text-gray-300"
+                        className="px-4 py-2 text-sm text-gray-300 odd:bg-white/[0.025]"
                       >
                         {name}
                       </li>

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import PlayerSearch, { type RankedPlayer } from "./PlayerSearch";
+import { positionTextClass } from "../lib/position-colors";
 
 /** ---------------- Types ---------------- */
 type PlayerRow = {
@@ -93,11 +94,11 @@ function posBadgeClass(pos: string) {
     "text-[10px] uppercase tracking-wide rounded px-1.5 py-0.5 border";
   switch (pos) {
     case "QB":
-      return `${base} border-red-700 bg-red-900/40 text-red-200`;
+      return `${base} border-[#B91C1C] bg-[#7F1D1D]/40 text-[#FECACA]`;
     case "RB":
       return `${base} border-green-700 bg-green-900/40 text-green-200`;
     case "WR":
-      return `${base} border-blue-700 bg-blue-900/40 text-blue-200`;
+      return `${base} border-[#1D4ED8] bg-[#1E3A8A]/40 text-[#BFDBFE]`;
     case "TE":
       return `${base} border-orange-700 bg-orange-900/40 text-orange-200`;
     case "DST":
@@ -112,11 +113,11 @@ function posBadgeClass(pos: string) {
 function posTextColorClass(pos: string) {
   switch (pos) {
     case "QB":
-      return "text-red-400";
+      return "text-[#F87171]";
     case "RB":
       return "text-green-400";
     case "WR":
-      return "text-blue-400";
+      return "text-[#60A5FA]";
     case "TE":
       return "text-orange-400";
     case "DST":
@@ -524,7 +525,7 @@ export default function TradePage() {
                   setShowReview(false);
                 }}
                 aria-pressed={independent}
-                className={`px-4 py-2 text-sm font-semibold transition ${independent ? "bg-gray-100 text-black" : "bg-black/30 text-gray-300 hover:bg-black/40"}`}
+                className={`px-4 py-2 text-sm font-semibold transition ${independent ? "bg-[#005030] text-white" : "bg-black/30 text-gray-300 hover:bg-[#A4D65E] hover:text-[#005030]"}`}
               >
                 League Independent
               </button>
@@ -534,7 +535,7 @@ export default function TradePage() {
                   setShowReview(false);
                 }}
                 aria-pressed={!independent}
-                className={`px-4 py-2 text-sm font-semibold ${!independent ? "bg-sky-700 text-white" : "text-gray-300"}`}
+                className={`px-4 py-2 text-sm font-semibold transition ${!independent ? "bg-[#005030] text-white" : "bg-black/30 text-gray-300 hover:bg-[#A4D65E] hover:text-[#005030]"}`}
               >
                 League Rosters
               </button>
@@ -709,7 +710,10 @@ export default function TradePage() {
                         {incomingForA.map((p) => (
                           <li key={p.id} className="flex justify-center">
                             <span className="truncate text-center">
-                              {p.position} · {p.name}{" "}
+                              <span className={positionTextClass(p.position)}>
+                                {p.position}
+                              </span>{" "}
+                              · {p.name}{" "}
                               <span className="font-mono">
                                 {p.value.toFixed(0)}
                               </span>
@@ -750,7 +754,10 @@ export default function TradePage() {
                         {incomingForB.map((p) => (
                           <li key={p.id} className="flex justify-center">
                             <span className="truncate text-center">
-                              {p.position} · {p.name}{" "}
+                              <span className={positionTextClass(p.position)}>
+                                {p.position}
+                              </span>{" "}
+                              · {p.name}{" "}
                               <span className="font-mono">
                                 {p.value.toFixed(0)}
                               </span>
@@ -1131,7 +1138,10 @@ export default function TradePage() {
                             className="flex justify-between gap-2 text-xs"
                           >
                             <span className="truncate text-left">
-                              {p.position} · {p.name}
+                              <span className={positionTextClass(p.position)}>
+                                {p.position}
+                              </span>{" "}
+                              · {p.name}
                             </span>
                             <span className="font-mono">
                               {p.value.toFixed(0)}
@@ -1161,7 +1171,10 @@ export default function TradePage() {
                             className="flex justify-between gap-2 text-xs"
                           >
                             <span className="truncate text-left">
-                              {p.position} · {p.name}
+                              <span className={positionTextClass(p.position)}>
+                                {p.position}
+                              </span>{" "}
+                              · {p.name}
                             </span>
                             <span className="font-mono">
                               {p.value.toFixed(0)}
