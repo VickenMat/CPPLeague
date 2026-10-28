@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PageShell } from "../components/LeagueUI";
 import { useEffect, useMemo, useState } from "react";
 import TransactionHistory from "./TransactionHistory";
 import { formatEstTime } from "../../lib/display-time";
@@ -140,15 +141,17 @@ export default function WaiversPage() {
     "rounded-lg border border-gray-700 bg-gray-950 px-3 py-2 text-white";
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-10 text-gray-100">
+    <PageShell
+      title="Waivers & Free Agents"
+      subtitle="Available players, transactions, and league insights."
+    >
       <Link href="/trade" className="text-sm text-gray-400 hover:text-white">
         ← Trade Calculator
       </Link>
-      <h1 className="mt-4 text-center text-3xl font-bold">
-        Waivers &amp; Free Agents
-      </h1>
+
       <div className="mt-3 flex flex-wrap justify-center gap-2">
         <button
+          aria-pressed={transactionView === "history"}
           aria-expanded={transactionView === "history"}
           aria-controls="transaction-history"
           onClick={() =>
@@ -156,14 +159,12 @@ export default function WaiversPage() {
               view === "history" ? null : "history",
             )
           }
-          className={
-            control +
-            " text-sm transition-colors hover:border-sky-500 hover:bg-sky-900/50"
-          }
+          className={`rounded-lg border px-3 py-2 text-sm font-semibold transition-colors ${transactionView === "history" ? "border-red-600 bg-red-600 text-white hover:bg-red-700" : "border-gray-700 bg-gray-950 text-gray-200 hover:border-gray-500 hover:bg-gray-900"}`}
         >
           Transaction History
         </button>
         <button
+          aria-pressed={transactionView === "insights"}
           aria-expanded={transactionView === "insights"}
           aria-controls="transaction-insights"
           onClick={() =>
@@ -171,10 +172,7 @@ export default function WaiversPage() {
               view === "insights" ? null : "insights",
             )
           }
-          className={
-            control +
-            " text-sm transition-colors hover:border-sky-500 hover:bg-sky-900/50"
-          }
+          className={`rounded-lg border px-3 py-2 text-sm font-semibold transition-colors ${transactionView === "insights" ? "border-red-600 bg-red-600 text-white hover:bg-red-700" : "border-gray-700 bg-gray-950 text-gray-200 hover:border-gray-500 hover:bg-gray-900"}`}
         >
           Insights
         </button>
@@ -451,6 +449,6 @@ export default function WaiversPage() {
           </p>
         </>
       )}
-    </main>
+    </PageShell>
   );
 }

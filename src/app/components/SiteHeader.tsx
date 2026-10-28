@@ -11,7 +11,6 @@ const LINKS = [
   { href: "/standings", label: "Standings" },
   { href: "/all-time", label: "All-Time" },
   { href: "/draft", label: "Draft" },
-  { href: "/power-rankings", label: "Rankings" },
   { href: "/trade", label: "Trade" },
   { href: "/waivers", label: "Waivers" },
   { href: "/rules", label: "Rules" },
@@ -28,6 +27,8 @@ export default function SiteHeader() {
   const [headerHidden, setHeaderHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const lastY = useRef(0);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -49,6 +50,44 @@ export default function SiteHeader() {
 
   useEffect(() => setMobileOpen(false), [pathname]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const menu = menuRef.current;
+    const menuButton = menuButtonRef.current;
+    const focusable = () =>
+      Array.from(
+        menu?.querySelectorAll<HTMLElement>(
+          "a[href], button:not([disabled])",
+        ) || [],
+      );
+    focusable()[0]?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileOpen(false);
+      }
+      if (event.key !== "Tab") return;
+      const items = focusable(),
+        first = items[0],
+        last = items.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+      menuButton?.focus();
+    };
+  }, [mobileOpen]);
+
   return (
     <>
       <header
@@ -60,7 +99,10 @@ export default function SiteHeader() {
           {/* Mobile hamburger */}
           <button
             className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-gray-800 bg-black/40 hover:bg-white/5 transition"
+            ref={menuButtonRef}
             aria-label="Open menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
             onClick={() => setMobileOpen(true)}
           >
             <span
@@ -110,12 +152,18 @@ export default function SiteHeader() {
       <div
         className={`fixed inset-0 z-50 lg:hidden ${mobileOpen ? "pointer-events-auto" : "pointer-events-none"}`}
         aria-hidden={!mobileOpen}
+        inert={!mobileOpen}
       >
         <div
           onClick={() => setMobileOpen(false)}
           className={`absolute inset-0 transition-opacity ${mobileOpen ? "opacity-100 bg-black/60" : "opacity-0"}`}
         />
         <aside
+          id="mobile-navigation"
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
           className={`absolute top-0 left-0 h-full w-72 max-w-[80vw] bg-gray-950/95 border-r border-gray-800 shadow-2xl transform transition-transform duration-300 ${
             mobileOpen ? "translate-x-0" : "-translate-x-full"
           }`}
@@ -184,6 +232,7 @@ function NavItem({
   return (
     <Link
       href={href}
+      aria-current={active ? "page" : undefined}
       onMouseEnter={() => setHoverColor(pickBrandColor())}
       onMouseLeave={() => setHoverColor(null)}
       className={[
@@ -212,6 +261,7 @@ function MobileNavItem({
   return (
     <Link
       href={href}
+      aria-current={active ? "page" : undefined}
       onClick={onClick}
       onMouseEnter={() => setHoverColor(pickBrandColor())}
       onMouseLeave={() => setHoverColor(null)}

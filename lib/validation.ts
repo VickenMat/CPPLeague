@@ -1,9 +1,29 @@
-export type LeagueKey = "A";
+export class InputError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "InputError";
+  }
+}
 
-export function parseLeagueKey(value?: string | null): LeagueKey | null {
-  if (!value) return null;
-  const normalized = value.trim().toUpperCase();
-  return normalized === "A" ? normalized : null;
+export function singleParam(params: URLSearchParams, name: string) {
+  const values = params.getAll(name);
+  if (values.length > 1) throw new InputError(`Invalid duplicate ${name}`);
+  return values[0] ?? null;
+}
+
+export function parseInteger(
+  value: string | null,
+  name: string,
+  min: number,
+  max: number,
+  fallback?: number,
+) {
+  if (value === null && fallback !== undefined) return fallback;
+  if (!value || !/^\d+$/.test(value)) throw new InputError(`Invalid ${name}`);
+  const number = Number(value);
+  if (!Number.isSafeInteger(number) || number < min || number > max)
+    throw new InputError(`Invalid ${name}`);
+  return number;
 }
 
 export function parseNumericId(
@@ -12,12 +32,12 @@ export function parseNumericId(
   opts: { minLength?: number; maxLength?: number } = {},
 ) {
   const normalized = value?.trim();
-  if (!normalized) throw new Error(`Missing ${name}`);
-  if (!/^\d+$/.test(normalized)) throw new Error(`Invalid ${name}`);
+  if (!normalized) throw new InputError(`Missing ${name}`);
+  if (!/^\d+$/.test(normalized)) throw new InputError(`Invalid ${name}`);
   if (opts.minLength && normalized.length < opts.minLength)
-    throw new Error(`Invalid ${name}`);
+    throw new InputError(`Invalid ${name}`);
   if (opts.maxLength && normalized.length > opts.maxLength)
-    throw new Error(`Invalid ${name}`);
+    throw new InputError(`Invalid ${name}`);
   return normalized;
 }
 
@@ -25,20 +45,12 @@ export function parseSeason(
   value: string | null | undefined,
   fallback?: string | null,
 ) {
-  const normalized = (value || fallback || "").trim();
-  if (!normalized) throw new Error("Missing season");
-  if (!/^\d{4}$/.test(normalized)) throw new Error("Invalid season");
+  const normalized = (value ?? fallback ?? "").trim();
+  if (!normalized) throw new InputError("Missing season");
+  if (!/^\d{4}$/.test(normalized)) throw new InputError("Invalid season");
 
   const numeric = Number(normalized);
-  if (numeric < 2010 || numeric > 2100) throw new Error("Invalid season");
-  return normalized;
-}
-
-export function parseUserIdentifier(value: unknown) {
-  const normalized = String(value || "").trim();
-  if (!normalized) throw new Error("Missing user");
-  if (normalized.length > 100) throw new Error("Invalid user");
-  if (!/^[\w .@-]+$/i.test(normalized)) throw new Error("Invalid user");
+  if (numeric < 2010 || numeric > 2100) throw new InputError("Invalid season");
   return normalized;
 }
 

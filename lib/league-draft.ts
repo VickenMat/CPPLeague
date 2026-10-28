@@ -17,6 +17,24 @@ export async function getLeagueDraft(season: number) {
   const teams = new Map<number, string>(
     data.teams.map((team: any) => [Number(team.id), toTeamName(team)]),
   );
+  const managers = new Map<string, string>(
+    (data.members || []).map((member: any) => [
+      String(member.id),
+      [member.firstName, member.lastName].filter(Boolean).join(" ").trim() ||
+        member.displayName ||
+        member.nickname ||
+        "Manager unavailable",
+    ]),
+  );
+  const managerForTeam = new Map<number, string>(
+    data.teams.map((team: any) => [
+      Number(team.id),
+      (team.owners || [team.primaryOwner])
+        .map((id: string) => managers.get(id))
+        .filter(Boolean)
+        .join(" / ") || "Manager unavailable",
+    ]),
+  );
   const names = new Map<number, string>();
   for (const team of data.teams)
     for (const entry of team.roster?.entries || []) {
@@ -38,6 +56,7 @@ export async function getLeagueDraft(season: number) {
               players: {
                 filterIds: { value: missing.slice(index, index + 100) },
                 limit: 100,
+                sortPercOwned: { sortPriority: 1, sortAsc: false },
               },
             }),
           },
@@ -62,6 +81,8 @@ export async function getLeagueDraft(season: number) {
         pick: Number(pick.overallPickNumber),
         team: teams.get(Number(pick.teamId)) || `Team ${pick.teamId}`,
         player: names.get(Number(pick.playerId)) || `Player ${pick.playerId}`,
+        manager:
+          managerForTeam.get(Number(pick.teamId)) || "Manager unavailable",
         keeper: Boolean(pick.keeper),
       }))
       .sort((a, b) => a.pick - b.pick),

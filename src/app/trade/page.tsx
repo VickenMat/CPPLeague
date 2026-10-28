@@ -489,7 +489,7 @@ export default function TradePage() {
     <div
       className="min-h-screen relative text-white"
       style={{
-        backgroundImage: "url('/league-mark.svg')",
+        backgroundImage: "url('/league-watermark.svg')",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",

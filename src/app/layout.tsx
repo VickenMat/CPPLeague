@@ -29,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-black text-white">
+        <div aria-hidden="true" className="site-background" />
         <SiteHeader />
         <main>{children}</main>
         <Analytics />

@@ -1,3 +1,4 @@
+import { singleParam } from "../../../../../lib/validation";
 import { validateLeagueReference } from "../../../../../lib/league";
 import { NextResponse } from "next/server";
 import { getTransactionHistory } from "../../../../../lib/transaction-history";
@@ -20,7 +21,7 @@ export async function GET(req: Request) {
   let season: string;
   try {
     season = parseSeason(
-      params.get("season"),
+      singleParam(params, "season"),
       process.env.ESPN_SEASON || String(new Date().getFullYear()),
     );
   } catch {

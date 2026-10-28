@@ -1,3 +1,4 @@
+import { singleParam } from "../../../../../lib/validation";
 import { validateLeagueReference } from "../../../../../lib/league";
 import { NextResponse } from "next/server";
 import { getTransactionInsights } from "../../../../../lib/transaction-insights";
@@ -21,10 +22,10 @@ export async function GET(req: Request) {
   let teamId: string;
   try {
     season = parseSeason(
-      params.get("season"),
+      singleParam(params, "season"),
       process.env.ESPN_SEASON || String(new Date().getFullYear()),
     );
-    teamId = parseNumericId(params.get("teamId"), "teamId", {
+    teamId = parseNumericId(singleParam(params, "teamId"), "teamId", {
       minLength: 1,
       maxLength: 4,
     });

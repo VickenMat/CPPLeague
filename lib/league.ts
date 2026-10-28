@@ -1,3 +1,4 @@
+import { InputError, singleParam } from "./validation";
 import { getEspnLeagueId } from "./espn";
 
 export function currentSeason() {
@@ -13,13 +14,16 @@ export function leagueUrl() {
 }
 
 export function validateLeagueReference(params: URLSearchParams) {
-  const key = params.get("key") || params.get("league");
-  const id = params.get("leagueId");
-  if (key && key.toUpperCase() !== "A" && key !== getEspnLeagueId()) {
-    throw new Error("Only the configured league is supported.");
+  const configuredId = getEspnLeagueId();
+  for (const name of ["key", "league", "leagueId"]) {
+    const value = singleParam(params, name);
+    if (
+      value !== null &&
+      value !== configuredId &&
+      value.toUpperCase() !== "A"
+    ) {
+      throw new InputError("Only the configured league is supported.");
+    }
   }
-  if (id && id.toUpperCase() !== "A" && id !== getEspnLeagueId()) {
-    throw new Error("Only the configured league is supported.");
-  }
-  return getEspnLeagueId();
+  return configuredId;
 }

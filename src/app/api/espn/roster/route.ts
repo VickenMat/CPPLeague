@@ -1,106 +1,46 @@
-import { NFL_TEAMS } from "../../../../../lib/nfl-teams";
 import { validateLeagueReference } from "../../../../../lib/league";
 import { NextResponse } from "next/server";
-import { espnHeadersForLeague, buildEspnUrl } from "../../../../../lib/espn";
-import { fetchJson } from "../../../../../lib/http";
+import { getLeagueRoster } from "../../../../../lib/league-roster";
+import { HttpError } from "../../../../../lib/http";
 import { checkRateLimit } from "../../../../../lib/rate-limit";
-import { parseNumericId, parseSeason } from "../../../../../lib/validation";
-
-// default-position → fantasy position
-const POS: Record<number, string> = {
-  1: "QB",
-  2: "RB",
-  3: "WR",
-  4: "TE",
-  5: "K",
-  16: "D/ST",
-};
-
-// lineupSlotId → slot label (used for starters/bench/IR)
-const SLOT: Record<number, string> = {
-  0: "QB",
-  2: "RB",
-  3: "RB/WR",
-  4: "WR",
-  5: "WR/TE",
-  6: "TE",
-  7: "OP",
-  23: "RB/WR/TE",
-  16: "D/ST",
-  17: "K",
-  20: "BE",
-  21: "IR",
-};
-
+import {
+  InputError,
+  parseNumericId,
+  parseSeason,
+  singleParam,
+} from "../../../../../lib/validation";
 export async function GET(req: Request) {
-  const rateLimitResponse = checkRateLimit(req, "espn-roster", 90, 60_000);
-  if (rateLimitResponse) return rateLimitResponse;
-
-  const { searchParams } = new URL(req.url);
+  const limited = checkRateLimit(req, "espn-roster", 90, 60_000);
+  if (limited) return limited;
   try {
-    const leagueId = validateLeagueReference(searchParams);
+    const params = new URL(req.url).searchParams;
+    validateLeagueReference(params);
     const season = parseSeason(
-      searchParams.get("season"),
+      singleParam(params, "season"),
       process.env.ESPN_SEASON,
     );
-    const teamId = parseNumericId(searchParams.get("teamId"), "teamId", {
+    const teamId = parseNumericId(singleParam(params, "teamId"), "teamId", {
       minLength: 1,
       maxLength: 4,
     });
-
-    const url = buildEspnUrl(season, leagueId, ["mRoster", "mTeam"]);
-    const json = await fetchJson<any>(url, {
-      headers: espnHeadersForLeague({ leagueId }),
-      timeoutMs: 12000,
+    return NextResponse.json(await getLeagueRoster(teamId, season), {
+      headers: { "Cache-Control": "no-store" },
     });
-
-    const team = (json?.teams ?? []).find(
-      (t: any) => String(t.id) === String(teamId),
-    );
-    if (!team) {
-      return NextResponse.json({ error: "Team not found" }, { status: 404 });
-    }
-
-    const entries = team?.roster?.entries ?? [];
-    const players = entries.map((e: any) => {
-      const p = e?.playerPoolEntry?.player ?? e?.player ?? {};
-      const id = p.id ?? e?.playerId;
-      const fullName = p.fullName ?? p.name ?? "Unknown";
-      const pos = POS[p?.defaultPositionId] ?? "Other";
-      const proTeamAbbrev =
-        p?.proTeamAbbrev ?? p?.proTeam?.abbrev ?? NFL_TEAMS[p?.proTeamId] ?? "";
-      const lineupSlotId = e?.lineupSlotId;
-      const lineupSlot =
-        SLOT[lineupSlotId] ??
-        (lineupSlotId == null ? undefined : `Slot ${lineupSlotId}`);
-      const percentOwned =
-        p?.ownership?.percentOwned ?? p?.percentOwned ?? undefined;
-
-      return {
-        id,
-        name: fullName,
-        position: pos,
-        nflTeam: proTeamAbbrev,
-        lineupSlot,
-        percentOwned,
-      };
-    });
-
-    return NextResponse.json({
-      team: {
-        id: team.id,
-        name:
-          (team?.location && team?.nickname
-            ? `${team.location} ${team.nickname}`
-            : team?.name) ?? `Team ${team.id}`,
-        abbrev: team?.abbrev,
-      },
-      players,
-    });
-  } catch (e: any) {
+  } catch (error) {
+    const status =
+      error instanceof InputError
+        ? 400
+        : error instanceof HttpError && error.status === 404
+          ? 404
+          : 502;
     return NextResponse.json(
-      { error: e?.message || "Unknown error" },
-      { status: /Missing|Invalid|Only/.test(e?.message || "") ? 400 : 500 },
+      {
+        error:
+          status === 502
+            ? "Unable to load the roster from ESPN. Please try again."
+            : (error as Error).message,
+      },
+      { status },
     );
   }
 }

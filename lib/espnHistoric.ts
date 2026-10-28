@@ -83,10 +83,3 @@ export async function fetchSeasonSchedule(
   );
   return { season, leagueId: getEspnLeagueId(), schedule };
 }
-
-export async function fetchSeasonDraftAndRosters(
-  _key: LeagueKey,
-  season: number,
-) {
-  return fetchLeagueData(season, ["mDraftDetail", "mRoster", "mTeam"]);
-}

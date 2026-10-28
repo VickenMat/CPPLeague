@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { TIER_STYLES } from "../../../lib/tierStyles";
 import {
   DndContext,
   useDraggable,
@@ -95,7 +96,7 @@ export default function PowerRanking() {
             Drag teams between tiers, or use each team’s dropdown.
           </p>
           <DndContext onDragEnd={drop}>
-            <div className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-5">
               {TIERS.map((tier) => (
                 <TierRow key={tier} tier={tier}>
                   {teams
@@ -144,10 +145,10 @@ function TierRow({
   return (
     <div
       ref={setNodeRef}
-      className={`min-h-24 rounded-xl border p-4 ${isOver ? "border-sky-400 bg-sky-950/40" : "border-gray-800 bg-white/5"}`}
+      className={`min-h-24 rounded-xl border p-4 ${tier === "Unassigned" ? "md:col-span-5 border-red-500/50 bg-black/30" : `${TIER_STYLES[tier].border} ${TIER_STYLES[tier].soft}`} ${isOver ? "ring-2 ring-[#D9D7B6]" : ""}`}
     >
-      <h2 className="mb-3 font-bold">{tier}</h2>
-      <div className="flex flex-wrap gap-3">{children}</div>
+      <h2 className="mb-3 text-center font-bold">{tier}</h2>
+      <div className="flex flex-wrap justify-center gap-3">{children}</div>
     </div>
   );
 }

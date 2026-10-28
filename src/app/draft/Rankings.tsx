@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -144,25 +143,9 @@ export default function Rankings() {
   }
 
   return (
-    <div className="relative min-h-screen text-white">
-      {/* Background stack: 1) faint logo 2) translucent gradient to keep readability */}
-      <div className="fixed inset-0 -z-10">
-        <img
-          src="/league-mark.svg"
-          alt="League watermark"
-          className="w-full h-full object-contain opacity-[0.25] pointer-events-none select-none"
-          style={{ objectPosition: "center" }}
-        />
-        {/* 70% gradient so the 8% logo shows through */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 to-black/70" />
-      </div>
-
+    <div className="relative text-white">
       {/* Content (no opaque background here) */}
-      <div className="relative z-10 min-h-screen px-6 py-10">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-extrabold">Draft Center</h1>
-        </header>
-
+      <div className="relative mt-10">
         {/* Top 300 — moved to the bottom (above PDF) */}
         <section className="mx-auto w-full max-w-6xl mt-12">
           <h2 className="text-2xl font-bold text-center">

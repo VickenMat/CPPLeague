@@ -4,29 +4,30 @@ export class HttpError extends Error {
 
   constructor(message: string, status: number, body?: string) {
     super(message);
-    this.name = 'HttpError';
+    this.name = "HttpError";
     this.status = status;
     this.body = body;
   }
 }
 
 function trimBody(body: string) {
-  return body.replace(/\s+/g, ' ').trim().slice(0, 300);
+  return body.replace(/\s+/g, " ").trim().slice(0, 300);
 }
 
 export async function readResponseMessage(res: Response) {
-  const text = await res.text().catch(() => '');
-  if (!text) return res.statusText || 'Request failed';
+  const text = await res.text().catch(() => "");
+  if (!text) return res.statusText || "Request failed";
 
   try {
     const parsed = JSON.parse(text);
-    if (typeof parsed?.error === 'string' && parsed.error) return parsed.error;
-    if (typeof parsed?.message === 'string' && parsed.message) return parsed.message;
+    if (typeof parsed?.error === "string" && parsed.error) return parsed.error;
+    if (typeof parsed?.message === "string" && parsed.message)
+      return parsed.message;
   } catch {
     // Non-JSON body.
   }
 
-  return trimBody(text) || res.statusText || 'Request failed';
+  return trimBody(text) || res.statusText || "Request failed";
 }
 
 export async function fetchJson<T>(
@@ -36,12 +37,16 @@ export async function fetchJson<T>(
   const { timeoutMs = 12000, ...requestInit } = init;
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  const signal = requestInit.signal
+    ? AbortSignal.any([requestInit.signal, controller.signal])
+    : controller.signal;
 
   try {
     const res = await fetch(input, {
       ...requestInit,
-      cache: requestInit.cache ?? 'no-store',
-      signal: controller.signal,
+      cache: requestInit.cache ?? "no-store",
+      redirect: "error",
+      signal,
     });
 
     if (!res.ok) {
@@ -51,17 +56,17 @@ export async function fetchJson<T>(
 
     const text = await res.text();
     if (!text) {
-      throw new Error('Empty response body');
+      throw new Error("Empty response body");
     }
 
     try {
       return JSON.parse(text) as T;
     } catch {
-      throw new Error('Invalid JSON response');
+      throw new Error("Invalid JSON response");
     }
   } catch (error) {
-    if (error instanceof DOMException && error.name === 'AbortError') {
-      throw new Error('Request timed out');
+    if (controller.signal.aborted && !requestInit.signal?.aborted) {
+      throw new Error("Request timed out");
     }
     throw error;
   } finally {
@@ -69,7 +74,7 @@ export async function fetchJson<T>(
   }
 }
 
-export function toErrorMessage(error: unknown, fallback = 'Unexpected error') {
+export function toErrorMessage(error: unknown, fallback = "Unexpected error") {
   if (error instanceof HttpError) {
     return `${error.message} [${error.status}]`;
   }

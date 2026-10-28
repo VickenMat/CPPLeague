@@ -1,10 +1,48 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* visited won't turn purple */
 .site-nav a:link,
-.site-nav a:visited { color: rgb(229 231 235); }
+.site-nav a:visited {
+  color: rgb(229 231 235);
+}
 
+/* Shared ANFF presentation, using CPP's own mark and single-league content. */
+.site-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 30%, transparent, rgba(0, 0, 0, 0.55)),
+    linear-gradient(135deg, #111827, #000);
+}
+.site-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background: url("/league-watermark.svg") center / min(85vw, 960px) auto
+    no-repeat;
+}
+html {
+  color-scheme: dark;
+}
+body {
+  isolation: isolate;
+}
+main {
+  min-height: calc(100svh - 4rem);
+}
+:where(a, button, input, select):focus-visible {
+  outline: 2px solid #d9d7b6;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

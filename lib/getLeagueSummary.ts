@@ -30,7 +30,16 @@ export const fetchLeagueData = cache(
           timeoutMs: 12000,
         });
         const data = Array.isArray(payload) ? payload[0] : payload;
-        if (!data || !Array.isArray(data.teams))
+        if (
+          !data ||
+          !Array.isArray(data.teams) ||
+          data.teams.some(
+            (team: any) =>
+              !team ||
+              !Number.isSafeInteger(Number(team.id)) ||
+              Number(team.id) < 1,
+          )
+        )
           throw new Error("ESPN returned no teams.");
         return data;
       } catch {
@@ -51,7 +60,10 @@ const summaryForSeason = cache(async (season: number) => {
     "mNav",
   ]);
   const ownersMap: Record<string, string> = {};
-  const members = [...(data.members || []), ...(data.users || [])];
+  const members = [
+    ...(Array.isArray(data.members) ? data.members : []),
+    ...(Array.isArray(data.users) ? data.users : []),
+  ].filter((member) => member && typeof member === "object");
   for (const member of members) {
     const id = String(member.id ?? member.userId ?? "");
     const name =
@@ -61,20 +73,47 @@ const summaryForSeason = cache(async (season: number) => {
     if (id && name) ownersMap[id] = name;
   }
   const rawTeams: any[] = data.teams;
-  const teams = rawTeams.map((team) => ({
-    ...team,
-    name: toTeamName(team),
-    primaryOwner: team.primaryOwner || team.owners?.[0],
-    displayOwner:
-      (team.owners || [team.primaryOwner])
-        .map((id: string) => ownersMap[id])
-        .filter(Boolean)
-        .join(" / ") || "Manager unavailable",
-    pointsFor: Number(team.record?.overall?.pointsFor ?? 0),
-    pointsAgainst: Number(team.record?.overall?.pointsAgainst ?? 0),
-    finalRank:
-      team.rankCalculatedFinal ?? team.finalRank ?? team.finalStanding ?? null,
-  }));
+  const finite = (value: unknown) =>
+    Number.isFinite(Number(value)) ? Number(value) : 0;
+  const teams = rawTeams.map((team) => {
+    const ownerIds: string[] = (
+      Array.isArray(team.owners) && team.owners.length
+        ? team.owners
+        : [team.primaryOwner]
+    ).filter((id: unknown): id is string => typeof id === "string");
+    const record = team.record?.overall || {};
+    return {
+      id: team.id as number | string,
+      name: toTeamName(team),
+      abbrev: typeof team.abbrev === "string" ? team.abbrev : "",
+      primaryOwner: ownerIds[0],
+      owners: ownerIds,
+      displayOwner:
+        ownerIds
+          .map((id) => ownersMap[id])
+          .filter(Boolean)
+          .join(" / ") || "Manager unavailable",
+      record: {
+        overall: {
+          wins: finite(record.wins),
+          losses: finite(record.losses),
+          ties: finite(record.ties),
+          pointsFor: finite(record.pointsFor),
+          pointsAgainst: finite(record.pointsAgainst),
+        },
+      },
+      pointsFor: finite(record.pointsFor),
+      pointsAgainst: finite(record.pointsAgainst),
+      playoffSeed: finite(team.playoffSeed),
+      finalRank:
+        finite(
+          team.rankCalculatedFinal ?? team.finalRank ?? team.finalStanding,
+        ) || null,
+      transactionCounter: {
+        acquisitions: finite(team.transactionCounter?.acquisitions),
+      },
+    };
+  });
   const sorted = [...teams].sort((a, b) => {
     const seedA = Number(a.playoffSeed);
     const seedB = Number(b.playoffSeed);
@@ -99,15 +138,21 @@ const summaryForSeason = cache(async (season: number) => {
     teams,
     standings: sorted.map((team, index) => toRecordRow(team, index + 1)),
     ownersMap,
-    users: members,
-    status: data.status || {},
+    users: members.map((member) => ({
+      id: String(member.id ?? member.userId ?? ""),
+      displayName: ownersMap[String(member.id ?? member.userId ?? "")] || "",
+    })),
+    status: {
+      currentScoringPeriodId: data.status?.currentScoringPeriodId ?? null,
+      currentMatchupPeriod: data.status?.currentMatchupPeriod ?? null,
+    },
     settings: {
       playoffTeamCount: schedule.playoffTeamCount ?? null,
       regularSeasonMatchups: schedule.matchupPeriodCount ?? null,
       lineupSlotCounts: data.settings?.rosterSettings?.lineupSlotCounts || {},
     },
     previousSeasons: (data.status?.previousSeasons || []).filter(
-      (year: number) => Number.isInteger(year) && year < season,
+      (year: number) => Number.isInteger(year) && year >= 2000 && year < season,
     ),
   };
 });

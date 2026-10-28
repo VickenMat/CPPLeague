@@ -1,3 +1,4 @@
+import { PageShell, AccentPanel } from "../components/LeagueUI";
 import { getLeagueSummary } from "../../../lib/getLeagueSummary";
 import { getLeagueDraft } from "../../../lib/league-draft";
 import Rankings from "./Rankings";
@@ -17,8 +18,10 @@ export default async function DraftPage({
   const season = years.includes(selected) ? selected : Number(league.season);
   const draft = await getLeagueDraft(season).catch(() => null);
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-center text-4xl font-bold">Draft</h1>
+    <PageShell
+      title="Draft Center"
+      subtitle="The official order, draft results, and player rankings."
+    >
       <form className="mt-6 flex justify-center gap-3">
         <label className="sr-only" htmlFor="draft-season">
           Draft season
@@ -48,7 +51,7 @@ export default async function DraftPage({
               {season} Draft Order
             </h2>
             {draft.order.length ? (
-              <ol className="mx-auto mt-4 max-w-xl list-inside list-decimal space-y-2 rounded-xl border border-gray-800 p-5">
+              <ol className="mx-auto mt-4 max-w-xl list-inside list-decimal space-y-2 text-center">
                 {draft.order.map((team) => (
                   <li key={team.id}>{team.name}</li>
                 ))}
@@ -59,7 +62,7 @@ export default async function DraftPage({
               </p>
             )}
           </section>
-          <section className="mt-8">
+          <AccentPanel className="mt-10">
             <h2 className="text-center text-2xl font-bold">
               {season} Draft Results
             </h2>
@@ -72,7 +75,7 @@ export default async function DraftPage({
                 <table className="w-full text-left text-sm">
                   <thead className="sticky top-0 bg-gray-950">
                     <tr>
-                      {["Round", "Pick", "Player", "Team", "Keeper"].map(
+                      {["Round", "Pick", "Player", "Team", "Manager"].map(
                         (title) => (
                           <th key={title} className="px-4 py-3">
                             {title}
@@ -90,19 +93,17 @@ export default async function DraftPage({
                           {pick.player}
                         </td>
                         <td className="px-4 py-3">{pick.team}</td>
-                        <td className="px-4 py-3">
-                          {pick.keeper ? "Yes" : "—"}
-                        </td>
+                        <td className="px-4 py-3">{pick.manager}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             )}
-          </section>
+          </AccentPanel>
         </>
       )}
       <Rankings />
-    </div>
+    </PageShell>
   );
 }

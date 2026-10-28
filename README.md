@@ -55,9 +55,32 @@ These do not block ESPN-backed pages:
 npm test
 npm run lint
 npm run build
+npm audit
 npm start
 ```
 
 Tests cover league isolation, manager changes between seasons, arbitrary team IDs, ESPN playoff classifications, draft mapping, and host fallback. Live ESPN access depends on valid credentials and ESPN availability.
 
 Deploy with the same four private environment settings in a separate hosting project. No deployment is performed by the local conversion.
+
+## Shared presentation and hardening
+
+The layout follows the original ANFF design: a dark gradient and faint watermark, red/blue/orange card accents, cream buttons, centered titles, and standings PF highlights. CPP remains a single league throughout. Shared presentation components live in `src/app/components/LeagueUI.tsx`.
+
+Server-rendered pages call the league data services directly. They do not construct internal fetch URLs from incoming Host headers. APIs validate conflicting/duplicate league references, season ranges, and bounded player-ID inputs. ESPN requests honor cancellation, have timeouts, and reject redirects; summary responses expose only the fields the UI uses. Historical matchup data is cached per season (one hour for past seasons, one minute for the current season).
+
+The in-memory rate limiter caps its bucket count and returns `Retry-After` on 429 responses. It is a per-process safeguard, not a distributed quota: the hosting proxy must supply trusted client IP headers, and an edge-level limit is appropriate for multi-instance deployments.
+
+Next.js and its lint configuration are aligned on the patched 15.5 line. The package override makes Next.js use this project's patched PostCSS 8 dependency. The unused Tailwind v3 plugin configuration has been removed; Tailwind v4 uses the existing PostCSS integration. Re-run the dependency audit when updating the lockfile.
+
+## CPP page content and contact setup
+
+- Draft order is centered without a card. Draft results show Team and Manager in separate columns and omit the Keeper column.
+- The navigation omits Power Rankings. The personal board is still available from the home tools section.
+- Waiver history and insights use Date, Add, Cut, and Transaction Team/Net Points columns. Insights use actual league-scored weekly ESPN totals after each move; missing game data remains explicitly unavailable. Limited ESPN player-card requests include a sort, as required by ESPN.
+- Rules render the live league settings, roster limits, scoring, divisions, waivers, trades, and playoff configuration. Numeric zero-value rules and unused roster positions are omitted. D/ST position-specific scoring overrides are preserved.
+- Media uses the ANFF section layout with CPP-only content. Add highlight links and soundbites in `lib/site-content.ts`. Discussion posts are device-local and capped at 100; they are not a shared league message board.
+- Contact uses the ANFF About/Quick Info/form/FAQ layout with no league selector. Optional `COMMISSIONER_NAME` and `COMMISSIONER_EMAIL` configure the contact details. An email-only setup opens a mail-app draft for the user to review and send.
+- Set `CONTACT_FORM_ENDPOINT` to a new CPP Formspree `https://formspree.io/f/...` endpoint to enable direct form delivery. Until an email or endpoint is supplied, the send button remains disabled and ESPN is offered as the contact route. No ANFF contact destination is used.
+
+Contact submissions validate origin, consent, field lengths, topic/priority, and body size; they are rate limited and never follow outbound redirects. The optional delivery endpoint stays on the server.

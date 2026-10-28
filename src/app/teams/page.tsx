@@ -67,7 +67,7 @@ function boxAccent(key: string) {
 
 /** Standings-style section accent (ring + inset top stripe) */
 function sectionAccent() {
-  return "rounded-2xl border border-gray-800 bg-black/30";
+  return "relative rounded-2xl border border-gray-800 bg-black/30 ring-1 ring-red-500/40 before:absolute before:inset-x-4 before:top-0 before:h-1.5 before:rounded-full before:bg-red-600 before:content-['']";
 }
 
 /* ------------------------ data helpers ------------------------ */
@@ -182,12 +182,6 @@ export default async function TeamsPage({
         backgroundSize: "contain",
       }}
     >
-      {/* Reliable 8% overlay regardless of Tailwind config */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ backgroundColor: "rgba(0,0,0,0.85)" }}
-      />
-
       {/* Content above the overlay */}
       <div className="relative max-w-6xl mx-auto px-6 py-10">
         <h1 className="text-4xl font-extrabold text-center mb-2">Teams</h1>
@@ -212,7 +206,7 @@ export default async function TeamsPage({
               <section key={L.leagueId} className={sectionAccent()}>
                 <div className="p-5">
                   {/* Centered league title */}
-                  <h2 className="text-2xl font-bold text-center">
+                  <h2 className="text-2xl font-bold text-center text-red-400">
                     {L.leagueName}
                   </h2>
                   <div className="text-center text-gray-400 mb-4">

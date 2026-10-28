@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getLeagueSummary } from "../../../../../lib/getLeagueSummary";
 import { checkRateLimit } from "../../../../../lib/rate-limit";
-import { parseSeason } from "../../../../../lib/validation";
+import { parseSeason, singleParam } from "../../../../../lib/validation";
 import {
   currentSeason,
   validateLeagueReference,
@@ -13,8 +13,13 @@ export async function GET(req: Request) {
   try {
     const params = new URL(req.url).searchParams;
     validateLeagueReference(params);
-    const season = parseSeason(params.get("season"), String(currentSeason()));
-    return NextResponse.json(await getLeagueSummary({ season }));
+    const season = parseSeason(
+      singleParam(params, "season"),
+      String(currentSeason()),
+    );
+    return NextResponse.json(await getLeagueSummary({ season }), {
+      headers: { "Cache-Control": "private, no-store" },
+    });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Unable to load league";

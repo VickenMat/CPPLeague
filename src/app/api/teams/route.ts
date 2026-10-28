@@ -1,6 +1,9 @@
+import { checkRateLimit } from "../../../../lib/rate-limit";
 import { NextResponse } from "next/server";
 import { getLeagueSummary } from "../../../../lib/getLeagueSummary";
-export async function GET() {
+export async function GET(req: Request) {
+  const limited = checkRateLimit(req, "teams", 60, 60_000);
+  if (limited) return limited;
   try {
     const league = await getLeagueSummary();
     return NextResponse.json(

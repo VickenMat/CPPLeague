@@ -1,8 +1,6 @@
 import { getLeagueSummary } from "../../../lib/getLeagueSummary";
-// app/all-time/page.tsx
-import { serverBaseUrl } from "../../../lib/serverUrl";
-import { fetchJson } from "../../../lib/http";
-
+import { getHistoryStatistics } from "../../../lib/history-statistics";
+import { getMatchupArchive } from "../../../lib/matchup-archive";
 type Leader = {
   owner: string;
   pf: number;
@@ -24,22 +22,6 @@ type StatCard = {
   detail?: string;
   subjectClassName?: string;
 };
-
-async function fetchHistory(params: URLSearchParams) {
-  const base = await serverBaseUrl();
-  const url = `${base}/api/espn/history?${new URLSearchParams({
-    ...Object.fromEntries(params),
-  }).toString()}`;
-  return fetchJson<any>(url, { timeoutMs: 60000 });
-}
-
-async function fetchEspnArchive(from: number, to: number) {
-  const base = await serverBaseUrl();
-  const q = new URLSearchParams({ from: String(from), to: String(to) });
-  return fetchJson<any>(`${base}/api/espn/archive?${q.toString()}`, {
-    timeoutMs: 60000,
-  });
-}
 
 const fmt2 = (n: any) =>
   Number.isFinite(Number(n)) ? Number(n).toFixed(2) : "—";
@@ -82,7 +64,7 @@ function buildParams(sp: Record<string, unknown> | undefined) {
 const CREAM = "#D9D7B6";
 
 function sectionAccent() {
-  return "rounded-2xl border border-gray-800 bg-black/20";
+  return "relative rounded-2xl border border-gray-800 bg-black/20 ring-1 ring-red-500/40 before:absolute before:inset-x-0 before:top-0 before:h-1.5 before:rounded-t-2xl before:bg-red-600 before:content-['']";
 }
 
 export default async function AllTimePage({
@@ -102,7 +84,7 @@ export default async function AllTimePage({
   if (baseParams.get("from")) apiParams.set("from", baseParams.get("from")!);
   if (baseParams.get("to")) apiParams.set("to", baseParams.get("to")!);
 
-  const data = await fetchHistory(apiParams);
+  const data = await getHistoryStatistics(apiParams);
 
   const seasons: any[] = Array.isArray(data?.seasons) ? data.seasons : [];
   const rawLeaders: Leader[] = Array.isArray(data?.leaders?.owners)
@@ -392,7 +374,9 @@ export default async function AllTimePage({
   const envSeason = Number(process.env.ESPN_SEASON || new Date().getFullYear());
   const fromParam = Number(baseParams.get("from") || firstSeason);
   const toParam = Number(baseParams.get("to") || envSeason);
-  const espnArchive = await fetchEspnArchive(fromParam, toParam);
+  const espnArchive = await getMatchupArchive(
+    new URLSearchParams({ from: String(fromParam), to: String(toParam) }),
+  );
   const espnCounts = espnArchive?.counts || {};
 
   const blowReg = (espnArchive?.blowouts?.regular || []).slice(0, 3);
@@ -404,19 +388,6 @@ export default async function AllTimePage({
 
   return (
     <div className="relative min-h-screen text-white px-6 py-10">
-      {/* --- Static, dark background with centered logo @ 8% --- */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        {/* base dark gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black" />
-        {/* vignette to darken edges */}
-        <div className="absolute inset-0 bg-[radial-gradient(70%_70%_at_50%_40%,rgba(0,0,0,0.35)_0%,rgba(0,0,0,0.85)_100%)]" />
-        {/* centered logo, subtle & fixed */}
-        <div
-          className="absolute inset-0 bg-center bg-no-repeat bg-contain bg-fixed opacity-[0.08]"
-          style={{ backgroundImage: "url('/league-mark.svg')" }}
-        />
-      </div>
-
       {/* Title + Tabs (centered) */}
       <div className="max-w-7xl mx-auto text-center mb-6">
         <h1 className="text-5xl font-extrabold mb-4">All-Time</h1>
