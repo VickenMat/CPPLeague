@@ -1,0 +1,1442 @@
+[
+  {
+    "name": "Bijan Robinson",
+    "team": "ATL",
+    "position": "RB",
+    "round": 1,
+    "pick": 1,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Ja'Marr Chase",
+    "team": "CIN",
+    "position": "WR",
+    "round": 1,
+    "pick": 2,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Jahmyr Gibbs",
+    "team": "DET",
+    "position": "RB",
+    "round": 1,
+    "pick": 3,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Saquon Barkley",
+    "team": "PHI",
+    "position": "RB",
+    "round": 1,
+    "pick": 4,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Justin Jefferson",
+    "team": "MIN",
+    "position": "WR",
+    "round": 1,
+    "pick": 5,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "CeeDee Lamb",
+    "team": "DAL",
+    "position": "WR",
+    "round": 1,
+    "pick": 6,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Christian McCaffrey",
+    "team": "SF",
+    "position": "RB",
+    "round": 1,
+    "pick": 7,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Amon-Ra St. Brown",
+    "team": "DET",
+    "position": "WR",
+    "round": 1,
+    "pick": 8,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Jonathan Taylor",
+    "team": "IND",
+    "position": "RB",
+    "round": 1,
+    "pick": 9,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Puka Nacua",
+    "team": "LAR",
+    "position": "WR",
+    "round": 1,
+    "pick": 10,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Malik Nabers",
+    "team": "NYG",
+    "position": "WR",
+    "round": 1,
+    "pick": 11,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Nico Collins",
+    "team": "HOU",
+    "position": "WR",
+    "round": 1,
+    "pick": 12,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Brian Thomas Jr.",
+    "team": "JAX",
+    "position": "WR",
+    "round": 2,
+    "pick": 1,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Derrick Henry",
+    "team": "BAL",
+    "position": "RB",
+    "round": 2,
+    "pick": 2,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Drake London",
+    "team": "ATL",
+    "position": "WR",
+    "round": 2,
+    "pick": 3,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "A.J. Brown",
+    "team": "PHI",
+    "position": "WR",
+    "round": 2,
+    "pick": 4,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Brock Bowers",
+    "team": "LV",
+    "position": "TE",
+    "round": 2,
+    "pick": 5,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Ashton Jeanty",
+    "team": "LV",
+    "position": "RB",
+    "round": 2,
+    "pick": 6,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Josh Jacobs",
+    "team": "GB",
+    "position": "RB",
+    "round": 2,
+    "pick": 7,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Bucky Irving",
+    "team": "TB",
+    "position": "RB",
+    "round": 2,
+    "pick": 8,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Chase Brown",
+    "team": "CIN",
+    "position": "RB",
+    "round": 2,
+    "pick": 9,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "De'Von Achane",
+    "team": "MIA",
+    "position": "RB",
+    "round": 2,
+    "pick": 10,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Kyren Williams",
+    "team": "LAR",
+    "position": "RB",
+    "round": 2,
+    "pick": 11,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Trey McBride",
+    "team": "ARI",
+    "position": "TE",
+    "round": 2,
+    "pick": 12,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Josh Allen",
+    "team": "BUF",
+    "position": "QB",
+    "round": 3,
+    "pick": 1,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Tee Higgins",
+    "team": "CIN",
+    "position": "WR",
+    "round": 3,
+    "pick": 2,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Lamar Jackson",
+    "team": "BAL",
+    "position": "QB",
+    "round": 3,
+    "pick": 3,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Tyreek Hill",
+    "team": "FA",
+    "position": "WR",
+    "round": 3,
+    "pick": 4,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Jayden Daniels",
+    "team": "WAS",
+    "position": "QB",
+    "round": 3,
+    "pick": 5,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Ladd McConkey",
+    "team": "LAC",
+    "position": "WR",
+    "round": 3,
+    "pick": 6,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Omarion Hampton",
+    "team": "LAC",
+    "position": "RB",
+    "round": 3,
+    "pick": 7,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Jaxon Smith-Njigba",
+    "team": "SEA",
+    "position": "WR",
+    "round": 3,
+    "pick": 8,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "James Cook III",
+    "team": "BUF",
+    "position": "RB",
+    "round": 3,
+    "pick": 9,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "James Conner",
+    "team": "ARI",
+    "position": "RB",
+    "round": 3,
+    "pick": 10,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Jalen Hurts",
+    "team": "PHI",
+    "position": "QB",
+    "round": 3,
+    "pick": 11,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Kenneth Walker III",
+    "team": "SEA",
+    "position": "RB",
+    "round": 3,
+    "pick": 12,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "George Kittle",
+    "team": "SF",
+    "position": "TE",
+    "round": 4,
+    "pick": 1,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "TreVeyon Henderson",
+    "team": "NE",
+    "position": "RB",
+    "round": 4,
+    "pick": 2,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Terry McLaurin",
+    "team": "WAS",
+    "position": "WR",
+    "round": 4,
+    "pick": 3,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Davante Adams",
+    "team": "LAR",
+    "position": "WR",
+    "round": 4,
+    "pick": 4,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Alvin Kamara",
+    "team": "NO",
+    "position": "RB",
+    "round": 4,
+    "pick": 5,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Marvin Harrison Jr.",
+    "team": "ARI",
+    "position": "WR",
+    "round": 4,
+    "pick": 6,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "DK Metcalf",
+    "team": "PIT",
+    "position": "WR",
+    "round": 4,
+    "pick": 7,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Chuba Hubbard",
+    "team": "CAR",
+    "position": "RB",
+    "round": 4,
+    "pick": 8,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Xavier Worthy",
+    "team": "KC",
+    "position": "WR",
+    "round": 4,
+    "pick": 9,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Mike Evans",
+    "team": "TB",
+    "position": "WR",
+    "round": 4,
+    "pick": 10,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Breece Hall",
+    "team": "NYJ",
+    "position": "RB",
+    "round": 4,
+    "pick": 11,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Garrett Wilson",
+    "team": "NYJ",
+    "position": "WR",
+    "round": 4,
+    "pick": 12,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "D'Andre Swift",
+    "team": "CHI",
+    "position": "RB",
+    "round": 5,
+    "pick": 1,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Sam LaPorta",
+    "team": "DET",
+    "position": "TE",
+    "round": 5,
+    "pick": 2,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Courtland Sutton",
+    "team": "DEN",
+    "position": "WR",
+    "round": 5,
+    "pick": 3,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "George Pickens",
+    "team": "DAL",
+    "position": "WR",
+    "round": 5,
+    "pick": 4,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "DJ Moore",
+    "team": "CHI",
+    "position": "WR",
+    "round": 5,
+    "pick": 5,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "David Montgomery",
+    "team": "HOU",
+    "position": "RB",
+    "round": 5,
+    "pick": 6,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Joe Burrow",
+    "team": "CIN",
+    "position": "QB",
+    "round": 5,
+    "pick": 7,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Baker Mayfield",
+    "team": "TB",
+    "position": "QB",
+    "round": 5,
+    "pick": 8,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Patrick Mahomes",
+    "team": "KC",
+    "position": "QB",
+    "round": 5,
+    "pick": 9,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Isiah Pacheco",
+    "team": "KC",
+    "position": "RB",
+    "round": 5,
+    "pick": 10,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Calvin Ridley",
+    "team": "TEN",
+    "position": "WR",
+    "round": 5,
+    "pick": 11,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Jameson Williams",
+    "team": "DET",
+    "position": "WR",
+    "round": 5,
+    "pick": 12,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Tony Pollard",
+    "team": "TEN",
+    "position": "RB",
+    "round": 6,
+    "pick": 1,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Jerry Jeudy",
+    "team": "CLE",
+    "position": "WR",
+    "round": 6,
+    "pick": 2,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Chris Olave",
+    "team": "NO",
+    "position": "WR",
+    "round": 6,
+    "pick": 3,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Zay Flowers",
+    "team": "BAL",
+    "position": "WR",
+    "round": 6,
+    "pick": 4,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "DeVonta Smith",
+    "team": "PHI",
+    "position": "WR",
+    "round": 6,
+    "pick": 5,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Rome Odunze",
+    "team": "CHI",
+    "position": "WR",
+    "round": 6,
+    "pick": 6,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Bo Nix",
+    "team": "DEN",
+    "position": "QB",
+    "round": 6,
+    "pick": 7,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "RJ Harvey",
+    "team": "DEN",
+    "position": "RB",
+    "round": 6,
+    "pick": 8,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Tetairoa McMillan",
+    "team": "CAR",
+    "position": "WR",
+    "round": 6,
+    "pick": 9,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Matthew Golden",
+    "team": "GB",
+    "position": "WR",
+    "round": 6,
+    "pick": 10,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Jaylen Waddle",
+    "team": "MIA",
+    "position": "WR",
+    "round": 6,
+    "pick": 11,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Rashee Rice",
+    "team": "KC",
+    "position": "WR",
+    "round": 6,
+    "pick": 12,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Cooper Kupp",
+    "team": "SEA",
+    "position": "WR",
+    "round": 7,
+    "pick": 1,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Joe Mixon",
+    "team": "HOU",
+    "position": "RB",
+    "round": 7,
+    "pick": 2,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Stefon Diggs",
+    "team": "NE",
+    "position": "WR",
+    "round": 7,
+    "pick": 3,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Aaron Jones Sr.",
+    "team": "MIN",
+    "position": "RB",
+    "round": 7,
+    "pick": 4,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Jakobi Meyers",
+    "team": "JAX",
+    "position": "WR",
+    "round": 7,
+    "pick": 5,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "David Njoku",
+    "team": "CLE",
+    "position": "TE",
+    "round": 7,
+    "pick": 6,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "T.J. Hockenson",
+    "team": "MIN",
+    "position": "TE",
+    "round": 7,
+    "pick": 7,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Tyrone Tracy Jr.",
+    "team": "NYG",
+    "position": "RB",
+    "round": 7,
+    "pick": 8,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Travis Kelce",
+    "team": "KC",
+    "position": "TE",
+    "round": 7,
+    "pick": 9,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Mark Andrews",
+    "team": "BAL",
+    "position": "TE",
+    "round": 7,
+    "pick": 10,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Emeka Egbuka",
+    "team": "TB",
+    "position": "WR",
+    "round": 7,
+    "pick": 11,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Kyler Murray",
+    "team": "ARI",
+    "position": "QB",
+    "round": 7,
+    "pick": 12,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Jaylen Warren",
+    "team": "PIT",
+    "position": "RB",
+    "round": 8,
+    "pick": 1,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Tyler Warren",
+    "team": "IND",
+    "position": "TE",
+    "round": 8,
+    "pick": 2,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Brock Purdy",
+    "team": "SF",
+    "position": "QB",
+    "round": 8,
+    "pick": 3,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Kaleb Johnson",
+    "team": "PIT",
+    "position": "RB",
+    "round": 8,
+    "pick": 4,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Chris Godwin Jr.",
+    "team": "TB",
+    "position": "WR",
+    "round": 8,
+    "pick": 5,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Ricky Pearsall",
+    "team": "SF",
+    "position": "WR",
+    "round": 8,
+    "pick": 6,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Jacory Croskey-Merritt",
+    "team": "WAS",
+    "position": "RB",
+    "round": 8,
+    "pick": 7,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Michael Pittman Jr.",
+    "team": "IND",
+    "position": "WR",
+    "round": 8,
+    "pick": 8,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Evan Engram",
+    "team": "DEN",
+    "position": "TE",
+    "round": 8,
+    "pick": 9,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Keon Coleman",
+    "team": "BUF",
+    "position": "WR",
+    "round": 8,
+    "pick": 10,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Deebo Samuel",
+    "team": "WAS",
+    "position": "WR",
+    "round": 8,
+    "pick": 11,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Travis Hunter",
+    "team": "JAX",
+    "position": "WR",
+    "round": 8,
+    "pick": 12,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Jordan Addison",
+    "team": "MIN",
+    "position": "WR",
+    "round": 9,
+    "pick": 1,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Justin Herbert",
+    "team": "LAC",
+    "position": "QB",
+    "round": 9,
+    "pick": 2,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Tank Bigsby",
+    "team": "PHI",
+    "position": "RB",
+    "round": 9,
+    "pick": 3,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Dak Prescott",
+    "team": "DAL",
+    "position": "QB",
+    "round": 9,
+    "pick": 4,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "J.K. Dobbins",
+    "team": "DEN",
+    "position": "RB",
+    "round": 9,
+    "pick": 5,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Xavier Legette",
+    "team": "CAR",
+    "position": "WR",
+    "round": 9,
+    "pick": 6,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Jordan Mason",
+    "team": "MIN",
+    "position": "RB",
+    "round": 9,
+    "pick": 7,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Rhamondre Stevenson",
+    "team": "NE",
+    "position": "RB",
+    "round": 9,
+    "pick": 8,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Jauan Jennings",
+    "team": "SF",
+    "position": "WR",
+    "round": 9,
+    "pick": 9,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Austin Ekeler",
+    "team": "WAS",
+    "position": "RB",
+    "round": 9,
+    "pick": 10,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Javonte Williams",
+    "team": "DAL",
+    "position": "RB",
+    "round": 9,
+    "pick": 11,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Cam Skattebo",
+    "team": "NYG",
+    "position": "RB",
+    "round": 9,
+    "pick": 12,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Keenan Allen",
+    "team": "LAC",
+    "position": "WR",
+    "round": 10,
+    "pick": 1,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Rashid Shaheed",
+    "team": "SEA",
+    "position": "WR",
+    "round": 10,
+    "pick": 2,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Jayden Higgins",
+    "team": "HOU",
+    "position": "WR",
+    "round": 10,
+    "pick": 3,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Travis Etienne Jr.",
+    "team": "JAX",
+    "position": "RB",
+    "round": 10,
+    "pick": 4,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Quinshon Judkins",
+    "team": "CLE",
+    "position": "RB",
+    "round": 10,
+    "pick": 5,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Zach Charbonnet",
+    "team": "SEA",
+    "position": "RB",
+    "round": 10,
+    "pick": 6,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Khalil Shakir",
+    "team": "BUF",
+    "position": "WR",
+    "round": 10,
+    "pick": 7,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Colston Loveland",
+    "team": "CHI",
+    "position": "TE",
+    "round": 10,
+    "pick": 8,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Josh Downs",
+    "team": "IND",
+    "position": "WR",
+    "round": 10,
+    "pick": 9,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Rachaad White",
+    "team": "TB",
+    "position": "RB",
+    "round": 10,
+    "pick": 10,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Darnell Mooney",
+    "team": "ATL",
+    "position": "WR",
+    "round": 10,
+    "pick": 11,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Tyjae Spears",
+    "team": "TEN",
+    "position": "RB",
+    "round": 10,
+    "pick": 12,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Dalton Kincaid",
+    "team": "BUF",
+    "position": "TE",
+    "round": 11,
+    "pick": 1,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Tucker Kraft",
+    "team": "GB",
+    "position": "TE",
+    "round": 11,
+    "pick": 2,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Jake Ferguson",
+    "team": "DAL",
+    "position": "TE",
+    "round": 11,
+    "pick": 3,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Braelon Allen",
+    "team": "NYJ",
+    "position": "RB",
+    "round": 11,
+    "pick": 4,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Caleb Williams",
+    "team": "CHI",
+    "position": "QB",
+    "round": 11,
+    "pick": 5,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Trey Benson",
+    "team": "ARI",
+    "position": "RB",
+    "round": 11,
+    "pick": 6,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Cedric Tillman",
+    "team": "CLE",
+    "position": "WR",
+    "round": 11,
+    "pick": 7,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Adam Thielen",
+    "team": "PIT",
+    "position": "WR",
+    "round": 11,
+    "pick": 8,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Dallas Goedert",
+    "team": "PHI",
+    "position": "TE",
+    "round": 11,
+    "pick": 9,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Jerome Ford",
+    "team": "CLE",
+    "position": "RB",
+    "round": 11,
+    "pick": 10,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Broncos D/ST",
+    "team": "DEN",
+    "position": "D/ST",
+    "round": 11,
+    "pick": 11,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Jayden Reed",
+    "team": "GB",
+    "position": "WR",
+    "round": 11,
+    "pick": 12,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Tyler Allgeier",
+    "team": "ATL",
+    "position": "RB",
+    "round": 12,
+    "pick": 1,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Nick Chubb",
+    "team": "HOU",
+    "position": "RB",
+    "round": 12,
+    "pick": 2,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Jake Bates",
+    "team": "DET",
+    "position": "K",
+    "round": 12,
+    "pick": 3,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Steelers D/ST",
+    "team": "PIT",
+    "position": "D/ST",
+    "round": 12,
+    "pick": 4,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Brandon Aubrey",
+    "team": "DAL",
+    "position": "K",
+    "round": 12,
+    "pick": 5,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Marvin Mims Jr.",
+    "team": "DEN",
+    "position": "WR",
+    "round": 12,
+    "pick": 6,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Najee Harris",
+    "team": "LAC",
+    "position": "RB",
+    "round": 12,
+    "pick": 7,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Justin Fields",
+    "team": "NYJ",
+    "position": "QB",
+    "round": 12,
+    "pick": 8,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Jaydon Blue",
+    "team": "DAL",
+    "position": "RB",
+    "round": 12,
+    "pick": 9,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Luther Burden III",
+    "team": "CHI",
+    "position": "WR",
+    "round": 12,
+    "pick": 10,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Texans D/ST",
+    "team": "HOU",
+    "position": "D/ST",
+    "round": 12,
+    "pick": 11,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Vikings D/ST",
+    "team": "MIN",
+    "position": "D/ST",
+    "round": 12,
+    "pick": 12,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Drake Maye",
+    "team": "NE",
+    "position": "QB",
+    "round": 13,
+    "pick": 1,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Jared Goff",
+    "team": "DET",
+    "position": "QB",
+    "round": 13,
+    "pick": 2,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Will Shipley",
+    "team": "PHI",
+    "position": "RB",
+    "round": 13,
+    "pick": 3,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Cameron Dicker",
+    "team": "LAC",
+    "position": "K",
+    "round": 13,
+    "pick": 4,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Jordan Love",
+    "team": "GB",
+    "position": "QB",
+    "round": 13,
+    "pick": 5,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Cam Ward",
+    "team": "TEN",
+    "position": "QB",
+    "round": 13,
+    "pick": 6,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Eagles D/ST",
+    "team": "PHI",
+    "position": "D/ST",
+    "round": 13,
+    "pick": 7,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Ravens D/ST",
+    "team": "BAL",
+    "position": "D/ST",
+    "round": 13,
+    "pick": 8,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Chase McLaughlin",
+    "team": "TB",
+    "position": "K",
+    "round": 13,
+    "pick": 9,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "J.J. McCarthy",
+    "team": "MIN",
+    "position": "QB",
+    "round": 13,
+    "pick": 10,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Cam Little",
+    "team": "JAX",
+    "position": "K",
+    "round": 13,
+    "pick": 11,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Kyle Pitts Sr.",
+    "team": "ATL",
+    "position": "TE",
+    "round": 13,
+    "pick": 12,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Tyler Bass",
+    "team": "BUF",
+    "position": "K",
+    "round": 14,
+    "pick": 1,
+    "drafted_by": "Allgeieric to Winning"
+  },
+  {
+    "name": "Dont'e Thornton Jr.",
+    "team": "LV",
+    "position": "WR",
+    "round": 14,
+    "pick": 2,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Jaylen Wright",
+    "team": "MIA",
+    "position": "RB",
+    "round": 14,
+    "pick": 3,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Justice Hill",
+    "team": "BAL",
+    "position": "RB",
+    "round": 14,
+    "pick": 4,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Christian Kirk",
+    "team": "HOU",
+    "position": "WR",
+    "round": 14,
+    "pick": 5,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "Ollie Gordon II",
+    "team": "MIA",
+    "position": "RB",
+    "round": 14,
+    "pick": 6,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Jake Elliott",
+    "team": "PHI",
+    "position": "K",
+    "round": 14,
+    "pick": 7,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Seahawks D/ST",
+    "team": "SEA",
+    "position": "D/ST",
+    "round": 14,
+    "pick": 8,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Bills D/ST",
+    "team": "BUF",
+    "position": "D/ST",
+    "round": 14,
+    "pick": 9,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Lions D/ST",
+    "team": "DET",
+    "position": "D/ST",
+    "round": 14,
+    "pick": 10,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Chris Boswell",
+    "team": "PIT",
+    "position": "K",
+    "round": 14,
+    "pick": 11,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Amari Cooper",
+    "team": "LV",
+    "position": "WR",
+    "round": 14,
+    "pick": 12,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Evan McPherson",
+    "team": "CIN",
+    "position": "K",
+    "round": 15,
+    "pick": 1,
+    "drafted_by": "The White Man's Burden"
+  },
+  {
+    "name": "Wan'Dale Robinson",
+    "team": "NYG",
+    "position": "WR",
+    "round": 15,
+    "pick": 2,
+    "drafted_by": "LaPorta Potty"
+  },
+  {
+    "name": "Tyler Loop",
+    "team": "BAL",
+    "position": "K",
+    "round": 15,
+    "pick": 3,
+    "drafted_by": "Henry Ruggs's Bumper"
+  },
+  {
+    "name": "Tre' Harris",
+    "team": "LAC",
+    "position": "WR",
+    "round": 15,
+    "pick": 4,
+    "drafted_by": "Deflated Balls,Violette’s calls"
+  },
+  {
+    "name": "Jason Sanders",
+    "team": "MIA",
+    "position": "K",
+    "round": 15,
+    "pick": 5,
+    "drafted_by": "Shant's Smart Team"
+  },
+  {
+    "name": "Bears D/ST",
+    "team": "CHI",
+    "position": "D/ST",
+    "round": 15,
+    "pick": 6,
+    "drafted_by": "Banks Always Open"
+  },
+  {
+    "name": "Ka'imi Fairbairn",
+    "team": "HOU",
+    "position": "K",
+    "round": 15,
+    "pick": 7,
+    "drafted_by": "COMIN OUT"
+  },
+  {
+    "name": "Brian Robinson Jr.",
+    "team": "SF",
+    "position": "RB",
+    "round": 15,
+    "pick": 8,
+    "drafted_by": "Drake \"Drake Maye\" Maye"
+  },
+  {
+    "name": "C.J. Stroud",
+    "team": "HOU",
+    "position": "QB",
+    "round": 15,
+    "pick": 9,
+    "drafted_by": "Team RaphCock"
+  },
+  {
+    "name": "Patriots D/ST",
+    "team": "NE",
+    "position": "D/ST",
+    "round": 15,
+    "pick": 10,
+    "drafted_by": "Vado's Tennis Academy"
+  },
+  {
+    "name": "Elic Ayomanor",
+    "team": "TEN",
+    "position": "WR",
+    "round": 15,
+    "pick": 11,
+    "drafted_by": "Busta Cherry"
+  },
+  {
+    "name": "Cardinals D/ST",
+    "team": "ARI",
+    "position": "D/ST",
+    "round": 15,
+    "pick": 12,
+    "drafted_by": "Allgeieric to Winning"
+  }
+]

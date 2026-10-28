@@ -1,0 +1,110 @@
+[
+  {
+    "teamName": "COMIN OUT",
+    "playerName": "Christian Watson",
+    "nflTeam": "GB",
+    "position": "WR",
+    "acquisitionMethod": "waiver",
+    "draftedRound": "",
+    "draftedPick": ""
+  },
+  {
+    "teamName": "Balloon Boy",
+    "playerName": "Ja'Marr Chase",
+    "nflTeam": "CIN",
+    "position": "WR",
+    "acquisitionMethod": "draft",
+    "draftedRound": 1,
+    "draftedPick": 2
+  },
+  {
+    "teamName": "Allgeieric to Winning",
+    "playerName": "Nico Collins",
+    "nflTeam": "HOU",
+    "position": "WR",
+    "acquisitionMethod": "draft",
+    "draftedRound": 1,
+    "draftedPick": 12
+  },
+  {
+    "teamName": "Jacob's Scary Team",
+    "playerName": "Drake London",
+    "nflTeam": "ATL",
+    "position": "WR",
+    "acquisitionMethod": "draft",
+    "draftedRound": 2,
+    "draftedPick": 3
+  },
+  {
+    "teamName": "Shant's Smart Team",
+    "playerName": "Justin Jefferson",
+    "nflTeam": "MIN",
+    "position": "WR",
+    "acquisitionMethod": "draft",
+    "draftedRound": 1,
+    "draftedPick": 5
+  },
+  {
+    "teamName": "Gregory's Great Team",
+    "playerName": "Javonte Williams",
+    "nflTeam": "DAL",
+    "position": "RB",
+    "acquisitionMethod": "draft",
+    "draftedRound": 9,
+    "draftedPick": 11
+  },
+  {
+    "teamName": "Nareg's Nifty Team",
+    "playerName": "Jahmyr Gibbs",
+    "nflTeam": "DET",
+    "position": "RB",
+    "acquisitionMethod": "draft",
+    "draftedRound": 1,
+    "draftedPick": 3
+  },
+  {
+    "teamName": "Banks Always Open",
+    "playerName": "Puka Nacua",
+    "nflTeam": "LAR",
+    "position": "WR",
+    "acquisitionMethod": "draft",
+    "draftedRound": 1,
+    "draftedPick": 10
+  },
+  {
+    "teamName": "Deflated Balls,Violette’s calls",
+    "playerName": "Luther Burden",
+    "nflTeam": "CHI",
+    "position": "WR",
+    "acquisitionMethod": "draft",
+    "draftedRound": 12,
+    "draftedPick": 10
+  },
+  {
+    "teamName": "Team RaphCock",
+    "playerName": "James Cook",
+    "nflTeam": "BUF",
+    "position": "RB",
+    "acquisitionMethod": "draft",
+    "draftedRound": 3,
+    "draftedPick": 9
+  },
+  {
+    "teamName": "Drake \"Drake Maye\" Maye",
+    "playerName": "Jaxon Smith-Njigba",
+    "nflTeam": "SEA",
+    "position": "WR",
+    "acquisitionMethod": "draft",
+    "draftedRound": 3,
+    "draftedPick": 8
+  },
+  {
+    "teamName": "The White Man's Burden",
+    "playerName": "Bijan Robinson",
+    "nflTeam": "ATL",
+    "position": "RB",
+    "acquisitionMethod": "draft",
+    "draftedRound": 1,
+    "draftedPick": 1
+  }
+]
