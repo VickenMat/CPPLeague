@@ -1,14 +1,21 @@
-import { NextResponse } from 'next/server';
-import { supabase } from '../../../../lib/supabase';
-
+import { NextResponse } from "next/server";
+import { getLeagueSummary } from "../../../../lib/getLeagueSummary";
 export async function GET() {
-  const { data, error } = await supabase
-    .from('teams')
-    .select('id, name, league, active')
-    .eq('active', true)
-    .order('league', { ascending: true })
-    .order('name', { ascending: true });
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data);
+  try {
+    const league = await getLeagueSummary();
+    return NextResponse.json(
+      league.teams.map((team) => ({
+        id: String(team.id),
+        name: team.name,
+        leagueId: league.leagueId,
+        season: league.season,
+        active: true,
+      })),
+    );
+  } catch {
+    return NextResponse.json(
+      { error: "Unable to load teams from ESPN." },
+      { status: 502 },
+    );
+  }
 }

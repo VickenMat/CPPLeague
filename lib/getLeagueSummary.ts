@@ -1,132 +1,131 @@
-// src/lib/getLeagueSummary.ts
-import { buildEspnUrl, espnHeadersForLeague, toRecordRow, toTeamName } from './espn';
+import { cache } from "react";
+import {
+  buildEspnUrl,
+  espnHeadersForLeague,
+  getEspnLeagueId,
+  toRecordRow,
+  toTeamName,
+  type LeagueKey,
+} from "./espn";
+import { fetchJson } from "./http";
+import { currentSeason } from "./league";
 
-type LeagueKey = 'A' | 'B' | 'C';
-
-export async function getLeagueSummary(opts: {
-  season: string | number;
-  leagueId?: string;
-  key?: LeagueKey;
-  debug?: boolean;
-}) {
-  const { season, leagueId: leagueIdParam, key, debug } = opts;
-
-  if (!season || (!leagueIdParam && !key)) {
-    throw new Error('Missing season and leagueId or key');
-  }
-
-  const leagueId =
-    leagueIdParam ||
-    (key === 'A'
-      ? process.env.ESPN_LEAGUE_ID_A
-      : key === 'B'
-      ? process.env.ESPN_LEAGUE_ID_B
-      : key === 'C'
-      ? process.env.ESPN_LEAGUE_ID_C
-      : undefined);
-
-  if (!leagueId) throw new Error('Unable to resolve leagueId');
-
-  const headers = espnHeadersForLeague({ leagueId, key });
-
-  const views = ['mSettings', 'mTeam', 'mStandings'];
-  const tries = [
-    { url: buildEspnUrl(season, leagueId, views, true), host: 'reads' },
-    { url: buildEspnUrl(season, leagueId, views, false), host: 'main' },
-  ];
-
-  let okJson: any = null;
-  let lastError: any = null;
-
-  for (const t of tries) {
-    const res = await fetch(t.url, { headers, cache: 'no-store' });
-    const ct = res.headers.get('content-type') || '';
-    const text = await res.text();
-
-    if (!res.ok || !ct.includes('application/json')) {
-      lastError = {
-        host: t.host,
-        espnStatus: res.status,
-        contentType: ct,
-        url: t.url,
-        bodyPreview: debug ? text.slice(0, 800) : undefined,
-      };
-      continue;
+export const fetchLeagueData = cache(
+  async (season: number, views: string[]) => {
+    const leagueId = getEspnLeagueId();
+    const headers = espnHeadersForLeague();
+    const urls =
+      season <= 2017
+        ? [
+            `https://fantasy.espn.com/apis/v3/games/ffl/leagueHistory/${leagueId}?${new URLSearchParams({ seasonId: String(season) })}&${views.map((v) => `view=${encodeURIComponent(v)}`).join("&")}`,
+          ]
+        : [
+            buildEspnUrl(season, leagueId, views),
+            buildEspnUrl(season, leagueId, views, false),
+          ];
+    for (const url of urls) {
+      try {
+        const payload = await fetchJson<any>(url, {
+          headers,
+          timeoutMs: 12000,
+        });
+        const data = Array.isArray(payload) ? payload[0] : payload;
+        if (!data || !Array.isArray(data.teams))
+          throw new Error("ESPN returned no teams.");
+        return data;
+      } catch {
+        // ESPN exposes two hosts; try the second when the first is unavailable.
+      }
     }
-    try {
-      okJson = JSON.parse(text);
-      break;
-    } catch (e) {
-      lastError = { host: t.host, espnStatus: res.status, contentType: ct, parseError: String(e) };
-    }
-  }
+    throw new Error(
+      `Unable to load the ${season} season from ESPN. Check the league access and credentials.`,
+    );
+  },
+);
 
-  if (!okJson) {
-    const hint =
-      (lastError?.espnStatus === 401 || lastError?.espnStatus === 403)
-        ? 'Unauthorized/Forbidden: refresh ESPN_S2_*/ESPN_SWID_* for this league.'
-        : lastError?.espnStatus === 404
-        ? 'Not found: check the leagueId OR the correct season year.'
-        : 'ESPN returned HTML instead of JSON. Try the previous season (e.g., 2024) or refresh cookies.';
-    const err = new Error('ESPN fetch failed');
-    (err as any).details = { season, leagueId, usedKey: key ?? null, lastError, hint };
-    throw err;
-  }
-
-  const data: any = okJson;
-  const leagueName = data?.settings?.name || data?.metadata?.leagueName || `League ${leagueId}`;
-  const currentWeek = data?.scoringPeriodId ?? data?.status?.currentMatchupPeriod ?? null;
-  const draftDate = data?.draftSettings?.date ?? null;
-
-  const members = Array.isArray(data?.members) ? data.members : [];
+const summaryForSeason = cache(async (season: number) => {
+  const data = await fetchLeagueData(season, [
+    "mSettings",
+    "mTeam",
+    "mStandings",
+    "mNav",
+  ]);
   const ownersMap: Record<string, string> = {};
-  for (const m of members) {
-    const id = String(m?.id ?? '');
-    if (!id) continue;
-    const dn =
-      m?.displayName ||
-      [m?.firstName, m?.lastName].filter(Boolean).join(' ') ||
-      m?.nickname ||
-      '';
-    ownersMap[id] = dn;
+  const members = [...(data.members || []), ...(data.users || [])];
+  for (const member of members) {
+    const id = String(member.id ?? member.userId ?? "");
+    const name =
+      [member.firstName, member.lastName].filter(Boolean).join(" ").trim() ||
+      member.displayName ||
+      member.nickname;
+    if (id && name) ownersMap[id] = name;
   }
-
-  const rawTeams = Array.isArray(data?.teams) ? data.teams : [];
-  const sortedTeams = [...rawTeams].sort((a: any, b: any) => {
-    const ar = a?.record?.overall || {};
-    const br = b?.record?.overall || {};
-    if ((br.wins ?? 0) !== (ar.wins ?? 0)) return (br.wins ?? 0) - (ar.wins ?? 0);
-    const apf = ar.pointsFor ?? 0,
-      bpf = br.pointsFor ?? 0;
-    if (bpf !== apf) return bpf - apf;
-    return (a.id ?? 0) - (b.id ?? 0);
+  const rawTeams: any[] = data.teams;
+  const teams = rawTeams.map((team) => ({
+    ...team,
+    name: toTeamName(team),
+    primaryOwner: team.primaryOwner || team.owners?.[0],
+    displayOwner:
+      (team.owners || [team.primaryOwner])
+        .map((id: string) => ownersMap[id])
+        .filter(Boolean)
+        .join(" / ") || "Manager unavailable",
+    pointsFor: Number(team.record?.overall?.pointsFor ?? 0),
+    pointsAgainst: Number(team.record?.overall?.pointsAgainst ?? 0),
+    finalRank:
+      team.rankCalculatedFinal ?? team.finalRank ?? team.finalStanding ?? null,
+  }));
+  const sorted = [...teams].sort((a, b) => {
+    const seedA = Number(a.playoffSeed);
+    const seedB = Number(b.playoffSeed);
+    if (seedA > 0 && seedB > 0) return seedA - seedB;
+    const ar = a.record?.overall || {},
+      br = b.record?.overall || {};
+    return (
+      (br.wins ?? 0) - (ar.wins ?? 0) ||
+      (br.ties ?? 0) - (ar.ties ?? 0) ||
+      b.pointsFor - a.pointsFor
+    );
   });
-  const standings = sortedTeams.map((t: any, i: number) => toRecordRow(t, i + 1));
-
+  const schedule = data.settings?.scheduleSettings || {};
   return {
-    leagueId,
+    leagueId: getEspnLeagueId(),
     season,
-    leagueName,
-    currentWeek,
-    draftDate,
-    teamCount: rawTeams.length,
-    teams: rawTeams.map((t: any) => ({
-      id: t.id,
-      name: toTeamName(t),
-      abbrev: t?.abbrev ?? '',
-      owners: t?.owners ?? [],
-      primaryOwner: (t?.owners && t.owners[0]) || t?.primaryOwner || '',
-      record: t?.record,
-      pointsFor: +(t?.record?.overall?.pointsFor ?? t?.pointsFor ?? 0),
-      pointsAgainst: +(t?.record?.overall?.pointsAgainst ?? t?.pointsAgainst ?? 0),
-      logo: t?.logo ?? t?.logoUrl ?? '',
-      // NEW: carry through final/playoff info so TeamPage can use it
-      finalRank: t?.finalRank ?? t?.rankFinal ?? null,
-      playoffSeed: t?.playoffSeed ?? null,
-      finalStanding: t?.finalStanding ?? null,
-    })),
-    standings,
+    leagueName: data.settings?.name || `League ${getEspnLeagueId()}`,
+    currentWeek:
+      data.scoringPeriodId ?? data.status?.currentScoringPeriodId ?? null,
+    draftDate: data.settings?.draftSettings?.date ?? null,
+    teamCount: teams.length,
+    teams,
+    standings: sorted.map((team, index) => toRecordRow(team, index + 1)),
     ownersMap,
     users: members,
+    status: data.status || {},
+    settings: {
+      playoffTeamCount: schedule.playoffTeamCount ?? null,
+      regularSeasonMatchups: schedule.matchupPeriodCount ?? null,
+      lineupSlotCounts: data.settings?.rosterSettings?.lineupSlotCounts || {},
+    },
+    previousSeasons: (data.status?.previousSeasons || []).filter(
+      (year: number) => Number.isInteger(year) && year < season,
+    ),
   };
+});
+
+export async function getLeagueSummary(
+  opts: {
+    season?: string | number;
+    leagueId?: string;
+    key?: LeagueKey;
+    debug?: boolean;
+  } = {},
+) {
+  if (opts.leagueId && opts.leagueId !== getEspnLeagueId())
+    throw new Error("Only the configured league is supported.");
+  if (opts.key && opts.key !== "A")
+    throw new Error("Only the configured league is supported.");
+  const season = Number(opts.season ?? currentSeason());
+  if (!Number.isInteger(season) || season < 2000 || season > 2100)
+    throw new Error("Invalid season");
+  return summaryForSeason(season);
 }

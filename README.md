@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CPP Fantasy Football
 
-## Getting Started
+A single-league Next.js site connected to ESPN league **243916**. The default season is **2026**.
 
-First, run the development server:
+## Run locally
 
-```bash
+```sh
+npm ci
+cp .env.example .env.local
+# Set the private ESPN cookies in .env.local if needed.
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Do not replace an existing `.env.local` when setting up this copy. It already contains the local connection settings. Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Only four values are required:
 
-## Learn More
+| Setting          | Purpose                                                 |
+| ---------------- | ------------------------------------------------------- |
+| `ESPN_LEAGUE_ID` | `243916`                                                |
+| `ESPN_SEASON`    | `2026`                                                  |
+| `ESPN_S2`        | Private `espn_s2` cookie, if the league requires access |
+| `ESPN_SWID`      | Private `SWID` cookie, if the league requires access    |
 
-To learn more about Next.js, take a look at the following resources:
+The previous `_A`, `_B`, and `_C` settings are no longer used. `.env.local` is ignored by Git. Do not put credentials in public variables or commit them.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data and behavior
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- League name, team directory, managers, standings, roster slots, and playoff team count come from ESPN.
+- Team pages use `/teams/[teamId]`; missing or nonconsecutive ESPN IDs require no new files.
+- Historical seasons are discovered from ESPN. Completed-season records are cached for five minutes. The all-time page uses final ESPN finishes, not regular-season leaders, to identify champions.
+- Franchise history shows each season's manager because an ESPN team ID can change ownership.
+- Matchup records use ESPN playoff bracket classifications and exclude pending games and byes. Consolation results remain separate from championship playoff records.
+- Draft order and results come from ESPN, with a season selector. Unresolved player names show their ESPN IDs rather than invented names.
+- Waiver availability, transactions, and insights use the configured league. General 2026 FantasyCalc values and Top 300 rankings remain static reference data and are not customized to this league's scoring.
+- Personal power rankings are stored in the browser, scoped by league and season. Community voting returns 503 until a separate league database is implemented; the copied Supabase connection is no longer used.
+- Old ANFF owner overrides, history files, draft lists, constitution, score overrides, forms, mailing-list destinations, branding, and fixed team routes have been removed.
 
-## Deploy on Vercel
+## What still needs league-specific input
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+These do not block ESPN-backed pages:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- A custom logo and colors. The current football/CPP mark is a temporary vector placeholder.
+- A separate rulebook or rules beyond ESPN's settings.
+- Commissioner contact details and a new contact-form/newsletter destination, if desired. Contact currently links to ESPN.
+- Photos and videos for the empty media page.
+- A database and voting requirements if community power rankings should be restored.
+- Corrections to ESPN history, manager names, or any records from before the seasons ESPN reports.
+
+## Verification
+
+```sh
+npm test
+npm run lint
+npm run build
+npm start
+```
+
+Tests cover league isolation, manager changes between seasons, arbitrary team IDs, ESPN playoff classifications, draft mapping, and host fallback. Live ESPN access depends on valid credentials and ESPN availability.
+
+Deploy with the same four private environment settings in a separate hosting project. No deployment is performed by the local conversion.

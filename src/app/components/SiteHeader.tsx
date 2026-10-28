@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 const LINKS = [
-  { href: '/leagues', label: 'Leagues' },
-  { href: '/teams', label: 'Teams' },
-  { href: '/standings', label: 'Standings' },
-  { href: '/all-time', label: 'All-Time' },
-  { href: '/draft', label: 'Draft' },
-  { href: '/keeper', label: 'Keeper' },
-  { href: '/trade', label: 'Trade' },
-  { href: '/waivers', label: 'Waivers' },
-  { href: '/rules', label: 'Rules' },
-  { href: '/media', label: 'Media' },
-  { href: '/contact', label: 'Contact' },
+  { href: "/leagues", label: "League" },
+  { href: "/teams", label: "Teams" },
+  { href: "/standings", label: "Standings" },
+  { href: "/all-time", label: "All-Time" },
+  { href: "/draft", label: "Draft" },
+  { href: "/power-rankings", label: "Rankings" },
+  { href: "/trade", label: "Trade" },
+  { href: "/waivers", label: "Waivers" },
+  { href: "/rules", label: "Rules" },
+  { href: "/media", label: "Media" },
+  { href: "/contact", label: "Contact" },
 ];
 
-const BRAND_COLORS = ['#ef4444', '#60a5fa', '#fb923c']; // red-500, blue-400, orange-400
+const BRAND_COLORS = ["#ef4444", "#60a5fa", "#fb923c"]; // red-500, blue-400, orange-400
 const TOP_THRESHOLD = 8;
 const SCROLL_DELTA = 3;
 
@@ -29,7 +29,8 @@ export default function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const lastY = useRef(0);
 
-  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   useEffect(() => {
     lastY.current = window.scrollY;
@@ -41,9 +42,9 @@ export default function SiteHeader() {
       else if (dy < -SCROLL_DELTA) setHeaderHidden(false);
       lastY.current = y;
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => setMobileOpen(false), [pathname]);
@@ -52,7 +53,7 @@ export default function SiteHeader() {
     <>
       <header
         className={`sticky top-0 z-50 bg-black/50 backdrop-blur-md border-b border-gray-800 shadow-md transition-transform duration-300 ${
-          headerHidden ? '-translate-y-full' : 'translate-y-0'
+          headerHidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
         <div className="max-w-7xl mx-auto h-16 px-3 sm:px-4 flex items-center justify-between">
@@ -62,7 +63,10 @@ export default function SiteHeader() {
             aria-label="Open menu"
             onClick={() => setMobileOpen(true)}
           >
-            <span aria-hidden className="flex flex-col items-center justify-center gap-1.5">
+            <span
+              aria-hidden
+              className="flex flex-col items-center justify-center gap-1.5"
+            >
               <span className="block w-6 h-0.5 bg-gray-200 rounded" />
               <span className="block w-6 h-0.5 bg-gray-200 rounded" />
               <span className="block w-6 h-0.5 bg-gray-200 rounded" />
@@ -72,12 +76,12 @@ export default function SiteHeader() {
           {/* Brand (logo) */}
           <Link
             href="/"
-            aria-label="ANFF Home"
+            aria-label="CPP Fantasy Football home"
             className="mx-auto lg:mx-0 inline-flex items-center"
           >
             <Image
-              src="/logo_transparent.png"
-              alt="ANFF"
+              src="/league-mark.svg"
+              alt="CPP Fantasy Football"
               width={120}
               height={36}
               priority
@@ -88,7 +92,12 @@ export default function SiteHeader() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-2 xl:gap-4 text-base font-semibold">
             {LINKS.map((l) => (
-              <NavItem key={l.href} href={l.href} label={l.label} active={isActive(l.href)} />
+              <NavItem
+                key={l.href}
+                href={l.href}
+                label={l.label}
+                active={isActive(l.href)}
+              />
             ))}
           </nav>
 
@@ -99,28 +108,28 @@ export default function SiteHeader() {
 
       {/* MOBILE SHEET */}
       <div
-        className={`fixed inset-0 z-50 lg:hidden ${mobileOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        className={`fixed inset-0 z-50 lg:hidden ${mobileOpen ? "pointer-events-auto" : "pointer-events-none"}`}
         aria-hidden={!mobileOpen}
       >
         <div
           onClick={() => setMobileOpen(false)}
-          className={`absolute inset-0 transition-opacity ${mobileOpen ? 'opacity-100 bg-black/60' : 'opacity-0'}`}
+          className={`absolute inset-0 transition-opacity ${mobileOpen ? "opacity-100 bg-black/60" : "opacity-0"}`}
         />
         <aside
           className={`absolute top-0 left-0 h-full w-72 max-w-[80vw] bg-gray-950/95 border-r border-gray-800 shadow-2xl transform transition-transform duration-300 ${
-            mobileOpen ? 'translate-x-0' : '-translate-x-full'
+            mobileOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
           <div className="h-16 px-4 flex items-center justify-between border-b border-gray-800">
             <Link
               href="/"
-              aria-label="ANFF Home"
+              aria-label="CPP Fantasy Football home"
               onClick={() => setMobileOpen(false)}
               className="inline-flex items-center"
             >
               <Image
-                src="/logo_transparent.png"
-                alt="ANFF"
+                src="/league-mark.svg"
+                alt="CPP Fantasy Football"
                 width={110}
                 height={34}
                 className="h-8 w-auto"
@@ -162,14 +171,25 @@ function pickBrandColor() {
   return BRAND_COLORS[(Math.random() * BRAND_COLORS.length) | 0];
 }
 
-function NavItem({ href, label, active }: { href: string; label: string; active: boolean }) {
+function NavItem({
+  href,
+  label,
+  active,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+}) {
   const [hoverColor, setHoverColor] = useState<string | null>(null);
   return (
     <Link
       href={href}
       onMouseEnter={() => setHoverColor(pickBrandColor())}
       onMouseLeave={() => setHoverColor(null)}
-      className={['px-2 py-1 rounded-md transition-colors duration-150', active ? 'text-white' : 'text-gray-300'].join(' ')}
+      className={[
+        "px-2 py-1 rounded-md transition-colors duration-150",
+        active ? "text-white" : "text-gray-300",
+      ].join(" ")}
       style={hoverColor ? { color: hoverColor } : undefined}
     >
       {label}
@@ -196,9 +216,9 @@ function MobileNavItem({
       onMouseEnter={() => setHoverColor(pickBrandColor())}
       onMouseLeave={() => setHoverColor(null)}
       className={[
-        'block px-3 py-2 rounded-lg text-base font-medium transition-colors',
-        active ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5',
-      ].join(' ')}
+        "block px-3 py-2 rounded-lg text-base font-medium transition-colors",
+        active ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/5",
+      ].join(" ")}
       style={hoverColor ? { color: hoverColor } : undefined}
     >
       {label}

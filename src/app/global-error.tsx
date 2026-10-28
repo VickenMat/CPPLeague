@@ -11,7 +11,7 @@ export default function GlobalError({
     <html lang="en">
       <body className="min-h-screen bg-black text-white">
         <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-red-400">ANFF</p>
+          <p className="text-sm uppercase tracking-[0.3em] text-red-400">CPP Fantasy Football</p>
           <h1 className="mt-4 text-3xl font-bold">The site hit an unexpected error.</h1>
           <p className="mt-3 text-gray-300">
             Refresh the page or try again. If this keeps happening, contact the commissioner.
