@@ -58,12 +58,12 @@ export default function PlayerSearch({ label, players, selected, excludedIds, di
             }
             if (e.key === 'Enter' && expanded && matches[active]) { e.preventDefault(); choose(matches[active]); }
           }}
-          className="w-full rounded-lg border border-gray-600 bg-gray-950 px-3 py-2 text-white outline-none focus:ring-2 focus:ring-sky-500 disabled:opacity-50" />
+          className="cpp-player-search-input w-full rounded-lg border border-gray-600 bg-gray-950 px-3 py-2 text-white outline-none disabled:opacity-50" />
         <ul id={`${id}-results`} role="listbox" aria-label={`${label} player suggestions`} hidden={!expanded}
           className="absolute z-20 mt-1 max-h-80 w-full overflow-y-auto rounded-lg border border-gray-700 bg-gray-950 shadow-xl">
           {matches.map((player, index) => <li key={player.id} id={`${id}-${index}`} role="option" aria-selected={active === index}
             onMouseDown={e => e.preventDefault()} onMouseEnter={() => setHighlight(index)} onClick={() => choose(player)}
-            className={`cursor-pointer px-3 py-2 ${active === index ? 'bg-sky-900/60' : 'hover:bg-white/10'}`}>
+            className={`cursor-pointer px-3 py-2 ${active === index ? 'bg-[#A4D65E] text-[#005030]' : 'hover:bg-white/10'}`}>
             <div className="flex items-center justify-between gap-2 text-sm"><span>{player.name}</span><span className="font-mono">{player.value.toLocaleString()}</span></div>
             <div className="text-xs text-gray-400"><span className={positionTextClass(player.position)}>{player.position}</span> · {player.nflTeam}</div>
           </li>)}

@@ -122,12 +122,12 @@ export default function SiteHeader() {
             className="mx-auto lg:mx-0 inline-flex items-center"
           >
             <Image
-              src="/league-mark.svg"
-              alt="CPP Fantasy Football"
-              width={120}
-              height={36}
+              src="/cppleague_logo.png"
+              alt="CPP League"
+              width={84}
+              height={56}
               priority
-              className="h-9 w-auto"
+              className="h-14 w-auto object-contain"
             />
           </Link>
 
@@ -176,11 +176,11 @@ export default function SiteHeader() {
               className="inline-flex items-center"
             >
               <Image
-                src="/league-mark.svg"
-                alt="CPP Fantasy Football"
-                width={110}
-                height={34}
-                className="h-8 w-auto"
+                src="/cppleague_logo.png"
+                alt="CPP League"
+                width={72}
+                height={48}
+                className="h-12 w-auto object-contain"
               />
             </Link>
             <button

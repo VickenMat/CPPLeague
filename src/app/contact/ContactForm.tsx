@@ -88,7 +88,7 @@ export default function ContactForm({
           className="hidden"
         />
         <div className="grid gap-4 md:grid-cols-2">
-          <label className="block text-sm text-gray-300">
+          <label className="block text-center text-sm text-gray-300">
             Name
             <input
               name="name"
@@ -99,7 +99,7 @@ export default function ContactForm({
               className={INPUT + " mt-1"}
             />
           </label>
-          <label className="block text-sm text-gray-300">
+          <label className="block text-center text-sm text-gray-300">
             Email
             <input
               name="email"
@@ -113,7 +113,7 @@ export default function ContactForm({
           </label>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <label className="block text-sm text-gray-300">
+          <label className="block text-center text-sm text-gray-300">
             Topic
             <select name="topic" className={INPUT + " mt-1"}>
               {CONTACT_TOPICS.map((topic) => (
@@ -121,7 +121,7 @@ export default function ContactForm({
               ))}
             </select>
           </label>
-          <label className="block text-sm text-gray-300">
+          <label className="block text-center text-sm text-gray-300">
             Priority
             <select name="priority" className={INPUT + " mt-1"}>
               {CONTACT_PRIORITIES.map((priority) => (
@@ -130,7 +130,7 @@ export default function ContactForm({
             </select>
           </label>
         </div>
-        <label className="block text-sm text-gray-300">
+        <label className="block text-center text-sm text-gray-300">
           Subject
           <input
             name="subject"
@@ -141,7 +141,7 @@ export default function ContactForm({
           />
         </label>
         <div className="text-sm text-gray-300">
-          <label htmlFor="contact-message" className="block">
+          <label htmlFor="contact-message" className="block text-center">
             Message
           </label>
           <textarea

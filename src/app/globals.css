@@ -57,7 +57,7 @@
   position: absolute;
   inset: 0;
   opacity: 0.08;
-  background: url("/league-watermark.svg") center / min(85vw, 960px) auto
+  background: url("/cppleague_logo.png") center / min(85vw, 960px) auto
     no-repeat;
 }
 html {
@@ -78,6 +78,13 @@ button:enabled:hover {
   border-color: var(--cpp-avocado);
   background-color: var(--cpp-avocado);
   color: var(--cpp-green);
+}
+
+.cpp-player-search-input:focus,
+.cpp-player-search-input:focus-visible {
+  border-color: var(--cpp-avocado);
+  outline: none;
+  box-shadow: none;
 }
 @media (prefers-reduced-motion: reduce) {
   *,

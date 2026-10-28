@@ -58,6 +58,27 @@ async function fetchLeagueSummary() {
   return res.json();
 }
 
+let playerRankingsRequest: Promise<RankedPlayer[]> | null = null;
+
+function fetchPlayerRankings() {
+  if (!playerRankingsRequest) {
+    playerRankingsRequest = fetch("/api/player-rankings", {
+      cache: "no-store",
+    })
+      .then(async (response) => {
+        const data = await response.json();
+        if (!response.ok)
+          throw new Error(data.error || "Unable to load FantasyCalc values.");
+        return Array.isArray(data.players) ? data.players : [];
+      })
+      .catch((error) => {
+        playerRankingsRequest = null;
+        throw error;
+      });
+  }
+  return playerRankingsRequest;
+}
+
 async function readError(res: Response): Promise<string> {
   const text = await res.text().catch(() => "");
   try {
@@ -183,28 +204,25 @@ export default function TradePage() {
 
   useEffect(() => {
     if (!independent) return;
-    const controller = new AbortController();
+    let cancelled = false;
     setRankingsLoading(true);
     setRankingsError("");
     (async () => {
       try {
-        const response = await fetch("/api/player-rankings", {
-          signal: controller.signal,
-        });
-        const data = await response.json();
-        if (!response.ok)
-          throw new Error(data.error || "Unable to load rankings.");
-        if (!controller.signal.aborted) setRankings(data.players);
+        const players = await fetchPlayerRankings();
+        if (!cancelled) setRankings(players);
       } catch (error) {
-        if (!controller.signal.aborted)
+        if (!cancelled)
           setRankingsError(
             error instanceof Error ? error.message : "Unable to load rankings.",
           );
       } finally {
-        if (!controller.signal.aborted) setRankingsLoading(false);
+        if (!cancelled) setRankingsLoading(false);
       }
     })();
-    return () => controller.abort();
+    return () => {
+      cancelled = true;
+    };
   }, [independent, rankingsRetry]);
 
   function addIndependentPlayer(side: 0 | 1, player: RankedPlayer) {
@@ -315,8 +333,6 @@ export default function TradePage() {
 
     try {
       const lid = leagueId;
-      const wk = Number(currentWeek || 1);
-
       if (!season)
         throw new Error("Season is not initialized yet from /api/espn/summary");
 
@@ -344,30 +360,11 @@ export default function TradePage() {
         return;
       }
 
-      // ------- values from FantasyCalc-backed route -------
-      const ids = players.map((p) => String(p.id)).filter(Boolean);
-
-      const pvSearch = new URLSearchParams({
-        leagueId: lid,
-        season,
-        scoringPeriodId: String(wk),
-        playerIds: ids.join(","),
-      });
-
-      const pvUrl = `/api/espn/player-values?${pvSearch.toString()}`;
-      const pvRes = await fetch(pvUrl, { cache: "no-store" });
-
-      let values: Record<string, number> = {};
-      if (!pvRes.ok) {
-        const msg = await readError(pvRes);
-        setSideError((s) => ({
-          ...s,
-          [side]: friendlyHttpError("Values", pvRes.status, msg),
-        }));
-      } else {
-        const pv = await pvRes.json();
-        values = pv.values || {};
-      }
+      // Values come directly from fantasycalc_redraftrankings_2026.csv.
+      const rankedPlayers = await fetchPlayerRankings();
+      const values = new Map(
+        rankedPlayers.map((player) => [String(player.id), player.value]),
+      );
 
       if (loadTokenRef.current[side] !== token) return;
 
@@ -381,7 +378,7 @@ export default function TradePage() {
               : (rawPos as TradeItem["position"]);
 
           // base value from CSV
-          let baseVal = Number(values[String(p.id)] ?? 0);
+          let baseVal = Number(values.get(String(p.id)) ?? 0);
           if (!baseVal || !Number.isFinite(baseVal)) baseVal = 0;
 
           // special defaults
@@ -490,7 +487,7 @@ export default function TradePage() {
     <div
       className="min-h-screen relative text-white"
       style={{
-        backgroundImage: "url('/league-watermark.svg')",
+        backgroundImage: "url('/cppleague_logo.png')",
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",

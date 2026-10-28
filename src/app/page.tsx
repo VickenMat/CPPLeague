@@ -14,7 +14,7 @@ export default async function Home() {
   const league = await getLeagueSummary().catch(() => null);
   return (
     <PageShell
-      title="Welcome to CPP 🏈"
+      title="Welcome to CPP League"
       subtitle={league?.leagueName || "CPP Fantasy Football"}
     >
       <div className="flex flex-wrap justify-center gap-3">

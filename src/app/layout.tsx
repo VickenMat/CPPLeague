@@ -9,6 +9,10 @@ export const metadata: Metadata = {
     template: "%s • CPP Fantasy Football",
   },
   description: "Teams, standings, history, and tools for CPP Fantasy Football.",
+  icons: {
+    icon: "/cppleague_logo.png",
+    apple: "/cppleague_logo.png",
+  },
   openGraph: {
     siteName: "CPP Fantasy Football",
     title: "CPP Fantasy Football",
